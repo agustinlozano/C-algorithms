@@ -7,4 +7,4 @@
   Este curso está dentro de la materia: Taller de programacion I,
   que forma parte del plan de estudios en mi carrera.
 
-### [Facultad UNR]:https://unr.edu.ar/ - [Instituto Politécnico Superior de Rosario]:https://www.ips.edu.ar/.
+### [Facultad UNR](https://unr.edu.ar/) - [Instituto Politécnico Superior de Rosario](https://www.ips.edu.ar/).
