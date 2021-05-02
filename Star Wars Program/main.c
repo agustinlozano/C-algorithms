@@ -246,5 +246,4 @@ void mostrarContenidoSegun(int decisionUsusario) {
     printf("\nError: Usted ha ingresado una opcion invalida.\n");
     regresarAlMenu();
   }
-
 }
