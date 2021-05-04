@@ -8,12 +8,12 @@ unsigned long long int calcularFactorial(int numero, unsigned long long int resu
 // Main
 int main(void) {
     int numeroUsuario;
-    unsigned long long int = resultado;
+    unsigned long long int resultado = 0;
 
     numeroUsuario = evaluarMenu();
-    calcularFactorial(numeroUsuario, resultado);
+    resultado = calcularFactorial(numeroUsuario, resultado);
     
-    printf("El factorial de %d es %llu", resultado);
+    printf("\nEl factorial de %d es %llu \n",numeroUsuario ,resultado);
 
     return EXIT_SUCCESS;
 }
@@ -22,16 +22,17 @@ int main(void) {
 int evaluarMenu() {
     int respuesta;
     printf("\n\tCalculo de factoriales\n");
-    printf("\nIngrese el valor entero al cual desea calcular su factorial");
-    scanf(" %d", respuesta);
+    printf("\nIngrese el valor entero al cual desea calcular su factorial: ");
+    scanf(" %d", &respuesta);
 
     return respuesta;
 }
 
 unsigned long long int calcularFactorial(int numeroUsuario, unsigned long long int resultado) {
+    resultado = numeroUsuario;   
 
-    for(int index = numeroUsuario; index > 0; --index) {
-       resultado = numeroUsuario * index;
+    for(int index = (numeroUsuario - 1); index > 0; index--) {
+       resultado = resultado * index;
     }
 
     return resultado;
