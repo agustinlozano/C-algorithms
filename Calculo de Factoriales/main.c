@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define SI 'y'
+#define NO 'n'
+
 // Prototipado
 int evaluarMenu();
 unsigned long long int calcularFactorial(int numero, unsigned long long int resultado);
+void regresarAlMenu();
 
 // Main
 int main(void) {
@@ -14,6 +18,8 @@ int main(void) {
     resultado = calcularFactorial(numeroUsuario, resultado);
     
     printf("\nEl factorial de %d es %llu \n",numeroUsuario ,resultado);
+
+    regresarAlMenu();
 
     return EXIT_SUCCESS;
 }
@@ -36,4 +42,20 @@ unsigned long long int calcularFactorial(int numeroUsuario, unsigned long long i
     }
 
     return resultado;
+}
+
+void regresarAlMenu() {
+  char decisionUsuario;
+  
+  printf("\nDesea regresar al menu principal y operar con otro numero? [y/n] ");
+  scanf(" %c", &decisionUsuario);
+  
+  if (decisionUsuario == SI) {
+    main();
+  } else if (decisionUsuario == NO) {
+    EXIT_SUCCESS;
+  } else {
+    printf("\nERROR: usted ha ingresado una opcion incorrecta\n");
+    EXIT_SUCCESS;
+  }
 }
