@@ -9,7 +9,7 @@ int evaluarMenu();
 unsigned long long int calcularFactorial(int numero, unsigned long long int resultado);
 void regresarAlMenu();
 
-// Main
+// Funcion Main 
 int main(void) {
     int numeroUsuario;
     unsigned long long int resultado = 0;
