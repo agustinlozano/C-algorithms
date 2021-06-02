@@ -1,23 +1,43 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 6
 
 int main(void) {
-  int array[] = {5, 10, 33, 8, 69};
-  int elementoIzquierda;
-  int elementoDerecha;
+   float array[SIZE];
+   float elemento;
+   float temp;
 
-  for(int index = 0; index < 5; index++) {
-    for(elementoIzquierda = 0, elementoDerecha = 1; elementoDerecha < 5; elementoIzquierda++, elementoDerecha++){
-      
-      if(array[elementoIzquierda] > array[elementoDerecha]) {
-	int varTemporal = array[elementoDerecha];
-	array[elementoDerecha] = array[elementoIzquierda];
-	array[elementoIzquierda] = varTemporal;
-      }	
-    }
-  }
-  
-  for (int j = 0; j < 5; j++) {
-    printf("El array en posicion %d vale: %d\n", j, array[j]);
-  }
-  return 0;
-} 
+   /* Rellenar arreglo */ 
+   printf("\nIngrese los valores del arreglo\n");
+   for (int k = 0; k<SIZE; k++) {
+      printf("Ingrese el valor para la posicion %d: ", k);
+      scanf(" %f", &elemento);
+      array[k] = elemento;
+   }
+   
+   
+   /* Ordeno el arreglo de forma ascendente */ 
+   for (int i = 0; i<SIZE; i++) {
+      for (int j = (i+1); j<SIZE; j++) {
+	 if (array[j] < array[i]) {
+	    temp = array[i];
+	    array[i] = array[j];
+	    array[j] = temp;
+	 } 
+      }
+   }  
+
+
+   /* Mostrar arreglo como un cojunto de elementos */
+   printf("\n{");
+   for (int l = 0; l<SIZE; l++) {
+      if (l == (SIZE-1)) {
+	 printf("%.1f}\n", array[l]);
+	 break;
+      }
+      printf("%.1f, ", array[l]);
+   }
+
+   return EXIT_SUCCESS;
+}
