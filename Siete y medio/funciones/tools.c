@@ -21,4 +21,18 @@ void imprimirPosicionesArr(int arreglo[], int length) {
     }
 }
 
+void imprimirPosicionesArrFloat(float arreglo[], int length) {
+    printf("\n");
+    for (int i = 0; i<length; i++) {
+        printf("Posicion %d es: %.1f\n", i, arreglo[i]);
+    }
+}
+
+void separarBloque() {
+    char respuesta;
+    printf("\nPara continuar presione una tecla.");
+    printf("\nSu respuesta: ");
+    scanf(" %c", &respuesta);
+}
+
 

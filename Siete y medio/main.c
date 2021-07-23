@@ -24,15 +24,17 @@ int main(void) {
         if (respuesta == SI) {
             main();
         }
-        return 0;
     }
         //printf("\nEl numero de jugadores es %d\n", jugadores);
 
-
-
-
-    comenzarJuego(mazoPartida, LENGTH, cantidadJugadores);
-
+    separarBloque();
+    ejecutarJuego(mazoPartida, LENGTH, cantidadJugadores);
+    /* Rondas
+    for(int index = 0; index<cantidadJugadores; index++){
+        printf("\n\tRonda numero %d!\n", index);
+        comenzarJuego(mazoPartida, LENGTH, cantidadJugadores);
+    }
+        */
 
     return 0;
 }
