@@ -4,6 +4,7 @@
 
 // Definicion de funciones
 void ordenar(Baraja mazo, int lenght) {
+
     for(int i = 0; i<(lenght); i++) {
         mazo[i] = (i+1);
     }
@@ -36,57 +37,9 @@ int generarNumeroRandom() {
     return (numero % 41) + 1;
 }
 
-int determinarJugadores() {
-    int respuesta;
-
-    printf("\nCuantos jugadores habra en la partida?");
-    printf("\nIngrese el numero de jugadores: ");
-    scanf(" %d", &respuesta);
-
-    return respuesta;
-}
-
-
 // FUNCIONES DEL JUEGO
 int repartirCarta(Baraja mazo, int length, int index) {
     return mazo[index];
-}
-
-void mostrarCarta(int arreglo[], int length, int indice, char respuesta) {
-    printf("\nPara ver su carta presione la tecla: [s]");
-    printf("\nSu respuesta: ");
-    scanf(" %c", &respuesta);
-
-    if(respuesta == 's') {
-        nombrarCarta(arreglo, length, indice);
-    } else {
-        printf("La carta permanece oculta/n");
-    }
-}
-
-int ejecutarMenuApuesta() {
-    int montoDinero = 0;
-
-    printf("\nCuanto desea apostar? MAXIMO $1200, MINIMO $100");
-    printf("\nIngrese cero si no quiere apostar");
-    printf("\nEl monto ingresado: ");
-    scanf(" %d", &montoDinero);
-
-    montoDinero = validarMonto(montoDinero);
-
-
-    return montoDinero;
-}
-
-int ejecutarMenuDesiciones() {
-    int eleccion;
-    printf("\nUsted puede elegir una de las siguientes opciones");
-    printf("\n1. Pedir carta");
-    printf("\n2. Plantarse");
-    printf("\nSu eleccion: ");
-    scanf(" %d", &eleccion);
-
-    return eleccion;
 }
 
 int validarMonto(int monto) {
@@ -111,24 +64,8 @@ float obtenerPuntaje(int cartas[], int length, int numeroApuestas) {
 
     return suma;
 }
-    /*
-int obtenerPremioCorrespondiente(int cartas[], int length, float puntaje) {
-    int numero;
-    if (puntaje == 15/2) {
-        switch(cartas) {
-
-        }
-    }
-    if (puntaje < 15/2) {
-        numero = 25;
-    }
-    return numero;
-}
-    */
-
 
 float evaluarPuntaje(float puntaje) {
-    float premio = puntaje;
     if(puntaje<1){
         printf("Ups! Parece que algo salio mal, el puntaje es invalido.\n");
     } else if (puntaje >= 1 && puntaje < 15/2.0) {
@@ -139,17 +76,81 @@ float evaluarPuntaje(float puntaje) {
     }
     else {
         printf("Parece que te has pasado de siete y medio. Perdes la apusta.\n");
+        puntaje = 0;
+    }
+
+    //ACA HUBO CAMBIOS EN VALIABLES
+
+    return puntaje;
+}
+
+int clasificarPremio(int cartasDelJugador[], int indiceJugador, float puntaje) {
+    int premio;
+
+    if (puntaje != 0 && indiceJugador > 2 ) {
+        printf("\nPuntaje != 0 y mas de dos cartas");
+        premio = 25;
+    } else if (puntaje != 0 && indiceJugador == 2) {
+        if (puntaje == 15/2.0) {
+            // Significa que una es un siete y la otra una figura.
+            premio = chequearSieteyMedias(cartasDelJugador, indiceJugador);
+        } else {
+            printf("\nPuntaje distinto a 0 con dos cartas pero puntaje != siete y medio");
+            premio = 25;
+        }
+    } else if (puntaje != 0 && indiceJugador == 1) {
+        printf("\nPuntaje distinto a 0 con una sola carta");
+        premio = 25;
+    }else {
+        printf("\nPuntaje es igual a 0");
         premio = 0;
     }
 
     return premio;
 }
 
-    /*
-int definirGanadoresPerdedores(float puntajes, int length, ) {
-    int ganador;
+int chequearSieteyMedias(int cartasDelJugador[], int indiceJugador) {
+    int premio, primerCarta, segundaCarta;
+
+    primerCarta = cartasDelJugador[0];
+    segundaCarta = cartasDelJugador[1];
 
 
+    if (primerCarta == 7 && segundaCarta == 10) {
+        premio = 100;
+    } else if (primerCarta == 7 && (segundaCarta == 8 || segundaCarta == 9 || segundaCarta == 10)) {
+        premio = 75;
+    } else if (primerCarta == 17 && (segundaCarta == 18 || segundaCarta == 19 || segundaCarta == 20)) {
+        premio = 75;
+    } else if (primerCarta == 27 && (segundaCarta == 28 || segundaCarta == 29 || segundaCarta == 30)) {
+        premio = 75;
+    } else if (primerCarta == 37 && (segundaCarta == 38 || segundaCarta == 39 || segundaCarta == 40)) {
+        premio = 75;
+    } else {
+        premio = 50;
+    }
+
+    return premio;
+}
+
+// Finalizar la ronda
+int definirGanadoresPerdedores(float puntajes[], int numeroJugadores) {
+    int ganador, comparador;
+
+    comparador = 0;
+    for (int i = 0; i<=numeroJugadores; i++) {
+        float aux = puntajes[i];
+
+        if (aux == 0.0) {
+            // El jugador en la posicion i esta descalificado
+        }
+
+        if (aux > comparador) {
+            comparador = aux;
+            ganador = i+1;
+        }
+
+    }
 
     return ganador;
-} */
+}

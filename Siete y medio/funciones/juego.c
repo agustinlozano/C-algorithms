@@ -2,15 +2,15 @@
 
 void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
     int cartasPosibles = POSIBLES_CARTAS_JUGADOR*numJugadores;
-    int cartasPartida[cartasPosibles], apuestas[numJugadores];
+    int cartasPartida[cartasPosibles], apuestas[numJugadores], premios[numJugadores];
 
     float puntajes[numJugadores];
-    int respuestaApuesta, indiceMazo = 0;
+    int respuestaApuesta, indiceMazo, ganador = 0;
     float puntaje, puntajeBanca = 0;
     char respuestaCarta = 'c';
 
 
-    ordenar(mazo, LENGTH);
+    //ordenar(mazo, LENGTH);
     //barajar(mazo, LENGTH);
 
     for(int i = 0; i<(numJugadores + BANCA); i++){
@@ -43,7 +43,6 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
 
         printf("\n\tEs momento para tomar una desicion!");
         while(respuestaApuesta != 2) {
-            // El jugador debe tomar una desicion
 
             respuestaApuesta = ejecutarMenuDesiciones();
 
@@ -59,6 +58,8 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
                     puntaje = obtenerPuntaje(cartasDelJugador, POSIBLES_CARTAS_JUGADOR, indiceJugador);
                     break;
                 case 2:
+                    // Quitar codigo duplicado y ser mas especifico mediante los printf acerca
+                    // de lo que pasa en cada case, en alto nivel
                     printf("\nVeamos sus cartas y luego calculemos el puntaje\n");
                     puntaje = obtenerPuntaje(cartasDelJugador, POSIBLES_CARTAS_JUGADOR, indiceJugador);
                     break;
@@ -79,6 +80,11 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
              * determinar el ganador y luego con cumplir los items adicionales
              */
         puntajes[j] = puntaje;
+
+        //Esto 'contiene' las cartas de cada cugador
+        premios[j] = clasificarPremio(cartasDelJugador, indiceJugador, puntaje);
+        printf("\nEl premio del jugador %d es: %d\n", j+1, premios[j]);
+
         separarBloque();
     }
         // FIN SEGUNDO FOR
@@ -113,15 +119,18 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
         }
         if(puntajeBanca > 15/2.0) {
             printf("\nLa banca se paso, paga a los jugadores.\n");
-            puntajes[numJugadores] = puntajeBanca;
+            puntajes[numJugadores] = 0;
             break;
         }
     }
+    separarBloque();
 
         //ACABAR LA RONDA
-    //definirGanadoresPerdedores(puntajes, numJugadores);
+    ganador = definirGanadoresPerdedores(puntajes, numJugadores);
+    printf("\nEl ganador de esta ronda es el jugador %d\n", ganador);
+    //repartirPremio(ganador, );
 
-
+    separarBloque();
     // Imprimir informacipn de los arreglos principales
     printf("\nLas cartas en juego para esta ronda fueron: \n");
     for(int i = 0; i<indiceMazo; i++){
@@ -133,6 +142,9 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
     printf("\n");
     printf("El arreglo de puntajes contiene: \n");
     imprimirPosicionesArrFloat(puntajes, numJugadores+BANCA);
+    printf("\n");
+    printf("El arreglo de premios contiene");
+    imprimirPosicionesArr(premios, numJugadores);
     printf("\n");
     printf("\nIndice mazo vale: %d", indiceMazo);
 }

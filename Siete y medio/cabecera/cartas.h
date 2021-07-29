@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAXIMOS_JUGADORES_POSIBLES 5
 #define LENGTH 40
 #define SI 'y'
 #define MINIMA_APUESTA 100
@@ -15,6 +16,7 @@
 typedef int Baraja[LENGTH];
 
 // Prototipo de funciones
+void ejecutarMenuPresentacion();
 void barajar(Baraja mazo, int length);
 int generarNumeroRandom();
 void ordenar(Baraja mazo, int length);
@@ -39,8 +41,12 @@ int validarMonto(int monto);
 float obtenerPuntaje(int cartas[], int length, int numeroApuestas);
 int obtenerPremioCorrespondiente(int cartas[], int length, float puntaje);
 float clasificarNaipe(int arreglo[], int length, int indice);
-void nombrarCarta(int array[], int length, int indice);
+void nombrarCarta(int cartas[], int length, int indice);
 float evaluarPuntaje(float puntaje);
+int clasificarPremio(int cartasDelJugador[], int indiceJugador, float puntaje);
+int chequearSieteyMedias(int cartasDelJugador[], int indiceJugador);
 
+// Finalizar ronda
+int definirGanadoresPerdedores(float puntajes[], int numeroJugadores);
 #endif
 
