@@ -88,22 +88,19 @@ int clasificarPremio(int cartasDelJugador[], int indiceJugador, float puntaje) {
     int premio;
 
     if (puntaje != 0 && indiceJugador > 2 ) {
-        printf("\nPuntaje != 0 y mas de dos cartas");
         premio = 25;
     } else if (puntaje != 0 && indiceJugador == 2) {
         if (puntaje == 15/2.0) {
-            // Significa que una es un siete y la otra una figura.
             premio = chequearSieteyMedias(cartasDelJugador, indiceJugador);
         } else {
-            printf("\nPuntaje distinto a 0 con dos cartas pero puntaje != siete y medio");
             premio = 25;
         }
     } else if (puntaje != 0 && indiceJugador == 1) {
-        printf("\nPuntaje distinto a 0 con una sola carta");
         premio = 25;
-    }else {
-        printf("\nPuntaje es igual a 0");
+    } else if (puntaje == 0) {
         premio = 0;
+    } else {
+        printf("\nERROR: Al parecer hubo un problema.");
     }
 
     return premio;
@@ -142,14 +139,10 @@ float definirGanadoresPerdedores(float puntajes[], int numeroJugadores, float pu
         printf("\nEl jugador %d pierde la apuesta por pasarse\n", indice+1);
         ganador = puntajeBanca;
     } else {
-        printf("\nPuntJugador: %.1f", puntajeJugador);
-        printf("\nPuntBanca: %.1f", puntajeBanca);
+        printf("\nPuntaje del jugador: %.1f", puntajeJugador);
 
         diferenciaJugador = SIETE_Y_MEDIO - puntajeJugador;
         diferenciaBanca = SIETE_Y_MEDIO - puntajeBanca;
-
-        printf("\nDif.Jugador: %.1f", diferenciaJugador);
-        printf("\nDif.Banca: %.1f", diferenciaBanca);
 
         if(diferenciaBanca < diferenciaJugador){
             printf("\nEl jugador %d pierde su apuesta contra la banca,", indice+1);
@@ -169,12 +162,25 @@ float definirGanadoresPerdedores(float puntajes[], int numeroJugadores, float pu
     return ganador;
 }
 
-void repartirPremio(int saldos[], int premios[], int apuestas[], int jugador) {
-    int ganancia;
+int repartirPremio(int saldos[], int premios[], int apuestas[], int jugador, int tesoroBanca) {
+    int gananciaJugador, saldojugador;
 
-    ganancia = (premios[jugador] * apuestas[jugador]) / 100;
-    saldos[jugador] = saldos[jugador] + apuestas[jugador] + ganancia;
-    printf("\nfinalmente su ganancia ha sido de $%d y su saldo final aumenta a $%d\n", ganancia, saldos[jugador]);
+    gananciaJugador = (premios[jugador] * apuestas[jugador]) / 100;
+    tesoroBanca = tesoroBanca - gananciaJugador;
+    saldojugador = saldos[jugador] + apuestas[jugador];
+
+    saldos[jugador] = saldojugador + gananciaJugador;
+
+    printf("\nSu ganancia ha sido de $%d y su saldo final aumenta a $%d.\n", gananciaJugador, saldos[jugador]);
+    printf("\nla banca disminuye su tesoro a $%d\n\n", tesoroBanca);
+
+    return tesoroBanca;
 }
 
+int aumentarTesoroBanca(int apuestas[], int jugador, int tesoroBanca) {
+    tesoroBanca = apuestas[jugador] + tesoroBanca;
+    printf("\nse le paga a la banca un total de $%d y el tesoro aumenta a $%d\n\n", apuestas[jugador], tesoroBanca);
+
+    return tesoroBanca;
+}
 

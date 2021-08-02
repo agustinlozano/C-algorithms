@@ -1,6 +1,6 @@
 #include "cartas.h"
 
-void ejecutarJuego(Baraja mazo, int length, int numJugadores, int saldos[], int tesoroBanca) {
+int ejecutarJuego(Baraja mazo, int length, int numJugadores, int saldos[], int tesoroBancaPrincipal) {
     int cartasPosibles = POSIBLES_CARTAS_JUGADOR*numJugadores;
     int cartasPartida[cartasPosibles], apuestas[numJugadores], premios[numJugadores];
 
@@ -8,6 +8,8 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores, int saldos[], int 
     int respuestaApuesta = 0, indiceMazo = 0;
     float puntaje = 0, puntajeBanca = 0, puntajeGanador = 0;
     char respuestaCarta = 'c';
+
+    int tesoroBancaLocal = tesoroBancaPrincipal;
 
 
     //ordenar(mazo, LENGTH);
@@ -87,8 +89,12 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores, int saldos[], int 
 
         //Esto 'contiene' las cartas de cada cugador
         premios[j] = clasificarPremio(cartasDelJugador, indiceJugador, puntaje);
-        printf("\nLa bonificacion del jugador %d es: %d\n", j+1, premios[j]);
 
+        if (premios[j] == 0) {
+            printf("\nEl usuario se paso, su bonificacion es cero.");
+        } else {
+            printf("\nLa bonificacion del jugador %d es: %d\n", j+1, premios[j]);
+        }
         separarBloque();
      }
 
@@ -96,15 +102,18 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores, int saldos[], int 
         // FIN SEGUNDO FOR
         printf("\n");
         printf("El arreglo de premios contiene");
-        imprimirPosicionesArr(premios, numJugadores);
+        imprimirPosicionesArr(premios, numJugadores);  // QUITAR EN VERISON FINAL
 
         // BANCA
-    printf("\nEl puntaje de la banca es: %.1f\n", puntajeBanca);
+    printf("\n\nTurno de de la banca.");
+    printf("\nEl puntaje correspondiente es: %.1f\n", puntajeBanca);
+
     nombrarCarta(cartasPartida, cartasPosibles, numJugadores);
 
+    printf("\nAhora debera tomar una desicion...");
     while(puntajeBanca){
         if(puntajeBanca < 11/2.0){
-             printf("\nPedir carta, puntaje menor a 5.5"); //QUITAR en version fial
+             printf("\nLa banca pide carta.");
              cartasPartida[indiceMazo] = repartirCarta(mazo, length, indiceMazo);
              printf("\n");
              nombrarCarta(cartasPartida, cartasPosibles, indiceMazo);
@@ -120,7 +129,7 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores, int saldos[], int 
             break;
         }
         if(puntajeBanca >= 6 && puntajeBanca < 15/2.0) {
-             printf("\nPlantarse, puntaje mayor a 6\n");
+             printf("\nLa banca se planta.\n");
              break;
         }
         if(puntajeBanca > 15/2.0) {
@@ -131,22 +140,23 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores, int saldos[], int 
     separarBloque();
 
         //ACABAR LA RONDA
+    printf("\nFinalmente la banca suma un puntaje de %1.f puntos.\n", puntajeBanca);
     if (puntajeBanca == 0) {
         printf("\n\tLa banca se paso, paga a los jugadores!\n");
         for (int i = 0; i<numJugadores; i++) {
-            printf("\nJugador %d recibe su pago,", i+1);
-            repartirPremio(saldos, premios, apuestas, i);
+            printf("\nJugador %d recibe su pago.", i+1);
+            tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, i, tesoroBancaLocal);
         }
     } else {
         for (int i = 0; i<numJugadores; i++) {
-            printf("\n\tVeamos como le fue al jugador %d", i+1);
+            printf("\n\tVeamos como le fue al jugador %d con respecto a la banca:", i+1);
             puntajeGanador = definirGanadoresPerdedores(puntajes, numJugadores, puntajeBanca, i);
 
             if(puntajeGanador != puntajeBanca){
-                printf("\ny la bonificacion correspondiente para el es: %d", premios[i]);
-                repartirPremio(saldos, premios, apuestas, i);
+                printf("\ny la bonificacion correspondiente para el es: %d\n", premios[i]);
+                tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, i, tesoroBancaLocal);
             } else {
-                printf("\nel tesoro de la banca aumenta a $%d\n", tesoroBanca+apuestas[i]);
+                tesoroBancaLocal = aumentarTesoroBanca(apuestas, i, tesoroBancaLocal);
             }
         }
     }
@@ -169,5 +179,9 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores, int saldos[], int 
     printf("\n");
     printf("\nIndice mazo vale: %d", indiceMazo);
     printf("\n");
+    printf("\nEl arreglo de saldos contiene");
     imprimirPosicionesArr(saldos, numJugadores);
+    printf("\n\nEl tesoro de la banca local es igual a: %d\n", tesoroBancaLocal);
+
+    return tesoroBancaLocal;
 }
