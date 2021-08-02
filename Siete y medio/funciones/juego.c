@@ -1,17 +1,19 @@
 #include "cartas.h"
 
-void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
+void ejecutarJuego(Baraja mazo, int length, int numJugadores, int saldos[], int tesoroBanca) {
     int cartasPosibles = POSIBLES_CARTAS_JUGADOR*numJugadores;
     int cartasPartida[cartasPosibles], apuestas[numJugadores], premios[numJugadores];
 
     float puntajes[numJugadores];
     int respuestaApuesta = 0, indiceMazo = 0;
-    float puntaje = 0, puntajeBanca = 0, ganador = 0;
+    float puntaje = 0, puntajeBanca = 0, puntajeGanador = 0;
     char respuestaCarta = 'c';
 
 
     //ordenar(mazo, LENGTH);
     //barajar(mazo, LENGTH);
+    //imprimirPosicionesArr(saldos, numJugadores);
+    //printf("\nEl tesoro de la banca es igual a: %d", tesoroBanca);
 
     for(int i = 0; i<(numJugadores + BANCA); i++){
         if(i == numJugadores) {
@@ -28,6 +30,10 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
         // COMIENZO SEGUNDO FOR
     printf("\n");
     for(int j = 0; j<numJugadores; j++) {
+
+     if (saldos[j] < 100) {
+        printf("\nEl jugador %d no tiene dinero suficiente para jugar esta ronda.", j+1);
+     } else {
         int indiceJugador = 0;
         int cartasDelJugador[POSIBLES_CARTAS_JUGADOR];
 
@@ -40,7 +46,8 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
         // Apuesta
         apuestas[j] = 0;
         printf("\n\n\tLlego la hora de apostar");
-        apuestas[j] = apuestas[j] + ejecutarMenuApuesta();
+        apuestas[j] = apuestas[j] + ejecutarMenuApuesta(saldos, j);
+        printf("\nEl saldo del jugador %d es: %d\n", j+1, saldos[j]);
 
         printf("\n\tEs momento para tomar una desicion!");
         while(respuestaApuesta != 2) {
@@ -71,7 +78,8 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
                 break;
             } else {
                 printf("\nDesea seguir apostando?");
-                apuestas[j] = apuestas[j] + ejecutarMenuApuesta();
+                apuestas[j] = apuestas[j] + ejecutarMenuApuesta(saldos, j);
+                printf("\nEl saldo del jugador %d es: %d\n", j+1, saldos[j]);
             }
         }
         respuestaApuesta = 0;
@@ -79,9 +87,11 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
 
         //Esto 'contiene' las cartas de cada cugador
         premios[j] = clasificarPremio(cartasDelJugador, indiceJugador, puntaje);
-        printf("\nEl premio del jugador %d es: %d\n", j+1, premios[j]);
+        printf("\nLa bonificacion del jugador %d es: %d\n", j+1, premios[j]);
 
         separarBloque();
+     }
+
     }
         // FIN SEGUNDO FOR
         printf("\n");
@@ -122,18 +132,24 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
 
         //ACABAR LA RONDA
     if (puntajeBanca == 0) {
-        printf("\nLa banca se paso, paga a los jugadores\n");
+        printf("\n\tLa banca se paso, paga a los jugadores!\n");
+        for (int i = 0; i<numJugadores; i++) {
+            printf("\nJugador %d recibe su pago,", i+1);
+            repartirPremio(saldos, premios, apuestas, i);
+        }
     } else {
         for (int i = 0; i<numJugadores; i++) {
             printf("\n\tVeamos como le fue al jugador %d", i+1);
-            ganador = definirGanadoresPerdedores(puntajes, numJugadores, puntajeBanca, i);
+            puntajeGanador = definirGanadoresPerdedores(puntajes, numJugadores, puntajeBanca, i);
 
-            if(ganador != puntajeBanca){
-                printf("\ny el premio correspondiente para el es: %d\n", premios[i]);
+            if(puntajeGanador != puntajeBanca){
+                printf("\ny la bonificacion correspondiente para el es: %d", premios[i]);
+                repartirPremio(saldos, premios, apuestas, i);
+            } else {
+                printf("\nel tesoro de la banca aumenta a $%d\n", tesoroBanca+apuestas[i]);
             }
         }
     }
-    //repartirPremio(ganador, );
 
     separarBloque();
     // Imprimir informacipn de los arreglos principales
@@ -152,4 +168,6 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
     imprimirPosicionesArr(premios, numJugadores);
     printf("\n");
     printf("\nIndice mazo vale: %d", indiceMazo);
+    printf("\n");
+    imprimirPosicionesArr(saldos, numJugadores);
 }

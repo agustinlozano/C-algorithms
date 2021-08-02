@@ -152,13 +152,13 @@ float definirGanadoresPerdedores(float puntajes[], int numeroJugadores, float pu
         printf("\nDif.Banca: %.1f", diferenciaBanca);
 
         if(diferenciaBanca < diferenciaJugador){
-            printf("\nEl jugador %d pierde su apuesta contra la banca.\n", indice+1);
+            printf("\nEl jugador %d pierde su apuesta contra la banca,", indice+1);
             ganador = puntajeBanca;
         } else if (diferenciaJugador < diferenciaBanca) {
-            printf("\nLa banca debe pagar al jugador. %d,", indice+1);
+            printf("\nLa banca debe pagar al jugador %d,", indice+1);
             ganador = puntajes[indice];
         } else if (diferenciaBanca == diferenciaJugador) {
-             printf("\nPor empate gana la banca.\n");
+             printf("\nPor empate gana la banca,");
              ganador = puntajeBanca;
         }else {
             printf("\nAl parecer hubo un error.\n");
@@ -167,6 +167,14 @@ float definirGanadoresPerdedores(float puntajes[], int numeroJugadores, float pu
     }
 
     return ganador;
+}
+
+void repartirPremio(int saldos[], int premios[], int apuestas[], int jugador) {
+    int ganancia;
+
+    ganancia = (premios[jugador] * apuestas[jugador]) / 100;
+    saldos[jugador] = saldos[jugador] + apuestas[jugador] + ganancia;
+    printf("\nfinalmente su ganancia ha sido de $%d y su saldo final aumenta a $%d\n", ganancia, saldos[jugador]);
 }
 
 

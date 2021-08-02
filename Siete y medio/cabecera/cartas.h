@@ -33,10 +33,10 @@ int determinarJugadores();
 void validarJugadores(int participantes);
 
 // Funciones principales
-void ejecutarJuego(Baraja mazo, int length, int numJugadores);
+void ejecutarJuego(Baraja mazo, int length, int numJugadores, int saldos[], int tesoroBanca);
 int repartirCarta(Baraja mazo, int length, int index);
 void mostrarCarta(int arreglo[], int length, int indice, char respuesta);
-int ejecutarMenuApuesta();
+int ejecutarMenuApuesta(int saldos[], int jugador);
 int ejecutarMenuDesiciones();
 int validarMonto(int monto);
 float obtenerPuntaje(int cartas[], int length, int numeroApuestas);
@@ -49,5 +49,6 @@ int chequearSieteyMedias(int cartasDelJugador[], int indiceJugador);
 
 // Finalizar ronda
 float definirGanadoresPerdedores(float puntajes[], int numeroJugadores, float puntajeBanca, int indice);
+void repartirPremio(int saldos[], int premios[], int apuestas[], int jugador);
 #endif
 

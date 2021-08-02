@@ -35,7 +35,7 @@ void mostrarCarta(int arreglo[], int length, int indice, char respuesta) {
     }
 }
 
-int ejecutarMenuApuesta() {
+int ejecutarMenuApuesta(int saldos[], int jugador) {
     int montoDinero = 0;
 
     printf("\nCuanto desea apostar? MAXIMO $1200, MINIMO $100");
@@ -44,7 +44,7 @@ int ejecutarMenuApuesta() {
     scanf(" %d", &montoDinero);
 
     montoDinero = validarMonto(montoDinero);
-
+    saldos[jugador] = saldos[jugador] - montoDinero;
 
     return montoDinero;
 }

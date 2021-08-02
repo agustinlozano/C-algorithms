@@ -1,10 +1,10 @@
 #include "cartas.h"
 
 int main(void) {
-    Baraja mazoPartida = {7, 27, 37, 16, 24, 5, 10, 28, 18, 40, 21, 32, 12};
+    Baraja mazoPartida = {7, 27, 37, 16, 24, 5, 10, 28, 18, 40, 21, 33, 12};
     int tesoroBanca = 100000;
     int saldos[MAXIMOS_JUGADORES_POSIBLES];
-    int cantidadJugadores;
+    int cantidadJugadores, ronda = 0;
     char respuesta;
 
     ejecutarMenuPresentacion();
@@ -32,14 +32,17 @@ int main(void) {
 
     printf("\n\nTodo listo para comenzar la partida!");
     separarBloque();
-    ejecutarJuego(mazoPartida, LENGTH, cantidadJugadores);
+    //printf("Ronda numero %d", ronda);
+    //ejecutarJuego(mazoPartida, LENGTH, cantidadJugadores, saldos, tesoroBanca);
 
-        /* Rondas
     for(int index = 0; index<cantidadJugadores; index++){
-        printf("\n\tRonda numero %d!\n", index);
-        comenzarJuego(mazoPartida, LENGTH, cantidadJugadores);
+        printf("\nRonda numero %d\n", ronda);
+        ejecutarJuego(mazoPartida, LENGTH, cantidadJugadores, saldos, tesoroBanca);;
+
+        // Mostrar estadisticas
+
+        ronda++;
     }
-        */
 
     return EXIT_SUCCESS;
 }
