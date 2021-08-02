@@ -11,6 +11,7 @@
 #define MAXIMA_APUESTA 1500
 #define BANCA 1
 #define POSIBLES_CARTAS_JUGADOR 8
+#define SIETE_Y_MEDIO 15/2.0
 
 // Definir tipo
 typedef int Baraja[LENGTH];
@@ -47,6 +48,6 @@ int clasificarPremio(int cartasDelJugador[], int indiceJugador, float puntaje);
 int chequearSieteyMedias(int cartasDelJugador[], int indiceJugador);
 
 // Finalizar ronda
-int definirGanadoresPerdedores(float puntajes[], int numeroJugadores);
+float definirGanadoresPerdedores(float puntajes[], int numeroJugadores, float puntajeBanca, int indice);
 #endif
 

@@ -134,23 +134,39 @@ int chequearSieteyMedias(int cartasDelJugador[], int indiceJugador) {
 }
 
 // Finalizar la ronda
-int definirGanadoresPerdedores(float puntajes[], int numeroJugadores) {
-    int ganador, comparador;
+float definirGanadoresPerdedores(float puntajes[], int numeroJugadores, float puntajeBanca, int indice) {
+    float diferenciaJugador = 0, diferenciaBanca = 0, puntajeJugador, ganador;
 
-    comparador = 0;
-    for (int i = 0; i<=numeroJugadores; i++) {
-        float aux = puntajes[i];
+    puntajeJugador = puntajes[indice];
+    if (puntajeJugador == 0) {
+        printf("\nEl jugador %d pierde la apuesta por pasarse\n", indice+1);
+        ganador = puntajeBanca;
+    } else {
+        printf("\nPuntJugador: %.1f", puntajeJugador);
+        printf("\nPuntBanca: %.1f", puntajeBanca);
 
-        if (aux == 0.0) {
-            // El jugador en la posicion i esta descalificado
+        diferenciaJugador = SIETE_Y_MEDIO - puntajeJugador;
+        diferenciaBanca = SIETE_Y_MEDIO - puntajeBanca;
+
+        printf("\nDif.Jugador: %.1f", diferenciaJugador);
+        printf("\nDif.Banca: %.1f", diferenciaBanca);
+
+        if(diferenciaBanca < diferenciaJugador){
+            printf("\nEl jugador %d pierde su apuesta contra la banca.\n", indice+1);
+            ganador = puntajeBanca;
+        } else if (diferenciaJugador < diferenciaBanca) {
+            printf("\nLa banca debe pagar al jugador. %d,", indice+1);
+            ganador = puntajes[indice];
+        } else if (diferenciaBanca == diferenciaJugador) {
+             printf("\nPor empate gana la banca.\n");
+             ganador = puntajeBanca;
+        }else {
+            printf("\nAl parecer hubo un error.\n");
+            ganador = puntajeBanca;
         }
-
-        if (aux > comparador) {
-            comparador = aux;
-            ganador = i+1;
-        }
-
     }
 
     return ganador;
 }
+
+

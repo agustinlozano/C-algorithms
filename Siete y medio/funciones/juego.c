@@ -5,8 +5,8 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
     int cartasPartida[cartasPosibles], apuestas[numJugadores], premios[numJugadores];
 
     float puntajes[numJugadores];
-    int respuestaApuesta, indiceMazo, ganador = 0;
-    float puntaje, puntajeBanca = 0;
+    int respuestaApuesta = 0, indiceMazo = 0;
+    float puntaje = 0, puntajeBanca = 0, ganador = 0;
     char respuestaCarta = 'c';
 
 
@@ -24,6 +24,7 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
         }
         indiceMazo++;
     }
+
         // COMIENZO SEGUNDO FOR
     printf("\n");
     for(int j = 0; j<numJugadores; j++) {
@@ -74,11 +75,6 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
             }
         }
         respuestaApuesta = 0;
-
-            /* Recolectar los putantajes y cartas de los correspondientes jugadores
-             * en un arreglo, para poder hacer las comparaciones entre ellos y la banca,
-             * determinar el ganador y luego con cumplir los items adicionales
-             */
         puntajes[j] = puntaje;
 
         //Esto 'contiene' las cartas de cada cugador
@@ -88,6 +84,9 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
         separarBloque();
     }
         // FIN SEGUNDO FOR
+        printf("\n");
+        printf("El arreglo de premios contiene");
+        imprimirPosicionesArr(premios, numJugadores);
 
         // BANCA
     printf("\nEl puntaje de la banca es: %.1f\n", puntajeBanca);
@@ -100,7 +99,6 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
              printf("\n");
              nombrarCarta(cartasPartida, cartasPosibles, indiceMazo);
              puntajeBanca = puntajeBanca + clasificarNaipe(cartasPartida, cartasPosibles, indiceMazo);
-             puntajes[numJugadores] = puntajeBanca;
              indiceMazo++;
         }
         if(puntajeBanca == 11/2.0) {
@@ -108,26 +106,33 @@ void ejecutarJuego(Baraja mazo, int length, int numJugadores) {
             printf("\n");
             nombrarCarta(cartasPartida, cartasPosibles, indiceMazo);
             puntajeBanca = puntajeBanca + clasificarNaipe(cartasPartida, cartasPosibles, indiceMazo);
-            puntajes[numJugadores] = puntajeBanca;
             indiceMazo++;
             break;
         }
         if(puntajeBanca >= 6 && puntajeBanca < 15/2.0) {
              printf("\nPlantarse, puntaje mayor a 6\n");
-             puntajes[numJugadores] = puntajeBanca;
              break;
         }
         if(puntajeBanca > 15/2.0) {
-            printf("\nLa banca se paso, paga a los jugadores.\n");
-            puntajes[numJugadores] = 0;
+            puntajeBanca = 0;
             break;
         }
     }
     separarBloque();
 
         //ACABAR LA RONDA
-    ganador = definirGanadoresPerdedores(puntajes, numJugadores);
-    printf("\nEl ganador de esta ronda es el jugador %d\n", ganador);
+    if (puntajeBanca == 0) {
+        printf("\nLa banca se paso, paga a los jugadores\n");
+    } else {
+        for (int i = 0; i<numJugadores; i++) {
+            printf("\n\tVeamos como le fue al jugador %d", i+1);
+            ganador = definirGanadoresPerdedores(puntajes, numJugadores, puntajeBanca, i);
+
+            if(ganador != puntajeBanca){
+                printf("\ny el premio correspondiente para el es: %d\n", premios[i]);
+            }
+        }
+    }
     //repartirPremio(ganador, );
 
     separarBloque();
