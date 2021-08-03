@@ -23,35 +23,41 @@ int determinarJugadores() {
     return respuesta;
 }
 
-void mostrarCarta(int arreglo[], int length, int indice, char respuesta) {
+void mostrarCarta(int cartas[], int indice, char respuesta) {
     printf("\nPara ver su carta presione la tecla: [s]");
     printf("\nSu respuesta: ");
     scanf(" %c", &respuesta);
 
-    if(respuesta == 's') {
-        nombrarCarta(arreglo, length, indice);
+    if(respuesta == MOSTRAR) {
+        nombrarCarta(cartas, indice);
     } else {
-        printf("La carta permanece oculta/n");
+        printf("La carta permanece oculta./n");
     }
 }
 
 int ejecutarMenuApuesta(int saldos[], int jugador) {
-    int montoDinero = 0;
+    int montoDinero = 0, saldoJugador;
 
     printf("\nCuanto desea apostar? MAXIMO $1200, MINIMO $100");
-    printf("\nIngrese cero si no quiere apostar");
+    printf("\nIngrese cero si no quiere apostar.");
     printf("\nEl monto ingresado: ");
     scanf(" %d", &montoDinero);
 
     montoDinero = validarMonto(montoDinero);
-    saldos[jugador] = saldos[jugador] - montoDinero;
+    saldoJugador = saldos[jugador];
+
+    if ((saldoJugador-montoDinero)<0) {
+        montoDinero = APUESTA_INVALIDA;
+    } else {
+        saldos[jugador] = saldos[jugador] - montoDinero;
+    }
 
     return montoDinero;
 }
 
 int ejecutarMenuDesiciones() {
     int eleccion;
-    printf("\nUsted puede elegir una de las siguientes opciones");
+    printf("\nUsted puede elegir una de las siguientes opciones:");
     printf("\n1. Pedir carta");
     printf("\n2. Plantarse");
     printf("\nSu eleccion: ");

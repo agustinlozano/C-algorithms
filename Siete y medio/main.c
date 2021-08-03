@@ -38,11 +38,10 @@ int main(void) {
     for(int index = 0; index<cantidadJugadores; index++){
         ronda++;
         printf("\n\n\tRonda numero %d\n", ronda);
-        tesoroBanca = ejecutarJuego(mazoPartida, LENGTH, cantidadJugadores, saldos, tesoroBanca);;
-        printf("\nTesoro banca principal es igual a: %d", tesoroBanca);
+        tesoroBanca = manejarRonda(mazoPartida, LENGTH, cantidadJugadores, saldos, tesoroBanca);;
 
         // Mostrar estadisticas
-        printf("\nMomento de la siguiente ronda!");
+        printf("\nMomento de la siguiente ronda!\n");
         separarBloque();
     }
 

@@ -1,20 +1,18 @@
 #include "cartas.h"
 #include <time.h>
 
+void ordenar(Baraja mazo, int lenghtMazo) {
 
-// Definicion de funciones
-void ordenar(Baraja mazo, int lenght) {
-
-    for(int i = 0; i<(lenght); i++) {
+    for(int i = 0; i<lenghtMazo; i++) {
         mazo[i] = (i+1);
     }
 }
 
-void barajar(Baraja mazo, int length) {
+void barajar(Baraja mazo, int lengthMazo) {
     int aux, indice;
 
     // Almacenar una carta en cada position
-    for(int i = 0; i<length; i++) {
+    for(int i = 0; i<lengthMazo; i++) {
 
         //Genero un numero random
         indice = generarNumeroRandom();
@@ -38,28 +36,28 @@ int generarNumeroRandom() {
 }
 
 // FUNCIONES DEL JUEGO
-int repartirCarta(Baraja mazo, int length, int index) {
-    return mazo[index];
+int repartirCarta(Baraja mazo, int indice) {
+    return mazo[indice];
 }
 
 int validarMonto(int monto) {
     if(monto>=MINIMA_APUESTA && monto<=MAXIMA_APUESTA){
-        printf("Exito: su apuesta fue efectuada.\n");
-    } else if (monto == 0) {
-        printf("Usted ha decidido no apostar\n");
+        printf("\nUsted pretende ingresar un monto por $%d\n", monto);
+    } else if (monto == APUESTA_NULA) {
+        printf("\nUsted ha decidido no apostar.\n");
     } else {
-        printf("\nERROR: su apuesta corresponde a un monto invalido.");
-        monto = 0;
+        printf("\nERROR: su apuesta corresponde a un monto invalido.\n");
+        monto = APUESTA_NULA;
     }
 
     return monto;
 }
 
-float obtenerPuntaje(int cartas[], int length, int numeroApuestas) {
+float obtenerPuntaje(int cartas[], int numeroApuestas) {
     float suma = 0;
     for(int i = 0; i<numeroApuestas; i++){
-        nombrarCarta(cartas, length, i);
-        suma = suma + clasificarNaipe(cartas, length, i);
+        nombrarCarta(cartas, i);
+        suma = suma + clasificarNaipe(cartas, i);
     }
 
     return suma;
@@ -68,37 +66,34 @@ float obtenerPuntaje(int cartas[], int length, int numeroApuestas) {
 float evaluarPuntaje(float puntaje) {
     if(puntaje<1){
         printf("Ups! Parece que algo salio mal, el puntaje es invalido.\n");
-    } else if (puntaje >= 1 && puntaje < 15/2.0) {
+    } else if (puntaje>=1 && puntaje<15/2.0) {
         printf("Sigue jugando, no pierde la apuesta.\n");
-        //obtenerPremioCorrespondiente(int cartas[], int length, float puntaje);
     } else if (puntaje == 15/2.0) {
         printf("Sigue jugando, no pierde la apuesta.\n");
     }
     else {
         printf("Parece que te has pasado de siete y medio. Perdes la apusta.\n");
-        puntaje = 0;
+        puntaje = NULO;
     }
-
-    //ACA HUBO CAMBIOS EN VALIABLES
 
     return puntaje;
 }
 
-int clasificarPremio(int cartasDelJugador[], int indiceJugador, float puntaje) {
+int clasificarPremio(int cartasDelJugador[], int numeroDeCartas, float puntaje) {
     int premio;
 
-    if (puntaje != 0 && indiceJugador > 2 ) {
+    if (puntaje != NULO && numeroDeCartas > 2 ) {
         premio = 25;
-    } else if (puntaje != 0 && indiceJugador == 2) {
+    } else if (puntaje != NULO && numeroDeCartas == 2) {
         if (puntaje == 15/2.0) {
-            premio = chequearSieteyMedias(cartasDelJugador, indiceJugador);
+            premio = chequearSieteyMedias(cartasDelJugador);
         } else {
             premio = 25;
         }
-    } else if (puntaje != 0 && indiceJugador == 1) {
+    } else if (puntaje != NULO && numeroDeCartas == 1) {
         premio = 25;
-    } else if (puntaje == 0) {
-        premio = 0;
+    } else if (puntaje == NULO) {
+        premio = NULO;
     } else {
         printf("\nERROR: Al parecer hubo un problema.");
     }
@@ -106,7 +101,7 @@ int clasificarPremio(int cartasDelJugador[], int indiceJugador, float puntaje) {
     return premio;
 }
 
-int chequearSieteyMedias(int cartasDelJugador[], int indiceJugador) {
+int chequearSieteyMedias(int cartasDelJugador[]) {
     int premio, primerCarta, segundaCarta;
 
     primerCarta = cartasDelJugador[0];
@@ -130,14 +125,18 @@ int chequearSieteyMedias(int cartasDelJugador[], int indiceJugador) {
     return premio;
 }
 
-// Finalizar la ronda
-float definirGanadoresPerdedores(float puntajes[], int numeroJugadores, float puntajeBanca, int indice) {
-    float diferenciaJugador = 0, diferenciaBanca = 0, puntajeJugador, ganador;
+    // Finalizar la ronda
+float definirGanadoresPerdedores(float puntajes[], float puntajeBanca, int jugador) {
+    float diferenciaJugador = 0, diferenciaBanca = 0, puntajeJugador, resultado;
 
-    puntajeJugador = puntajes[indice];
-    if (puntajeJugador == 0) {
-        printf("\nEl jugador %d pierde la apuesta por pasarse\n", indice+1);
-        ganador = puntajeBanca;
+    puntajeJugador = puntajes[jugador];
+
+    if (puntajeJugador == DESCALIFICADO) {
+        printf("\nEste jugador no participo en la ronda.");
+        resultado = DESCALIFICADO;
+    } else if (puntajeJugador == NULO) {
+        printf("\nEl jugador %d pierde la apuesta por pasarse.", jugador+1);
+        resultado = puntajeBanca;
     } else {
         printf("\nPuntaje del jugador: %.1f", puntajeJugador);
 
@@ -145,21 +144,21 @@ float definirGanadoresPerdedores(float puntajes[], int numeroJugadores, float pu
         diferenciaBanca = SIETE_Y_MEDIO - puntajeBanca;
 
         if(diferenciaBanca < diferenciaJugador){
-            printf("\nEl jugador %d pierde su apuesta contra la banca,", indice+1);
-            ganador = puntajeBanca;
+            printf("\nEl jugador %d pierde su apuesta contra la banca.", jugador+1);
+            resultado = puntajeBanca;
         } else if (diferenciaJugador < diferenciaBanca) {
-            printf("\nLa banca debe pagar al jugador %d,", indice+1);
-            ganador = puntajes[indice];
+            printf("\nLa banca debe pagar al jugador %d,", jugador+1);
+            resultado = puntajeJugador;
         } else if (diferenciaBanca == diferenciaJugador) {
-             printf("\nPor empate gana la banca,");
-             ganador = puntajeBanca;
-        }else {
+            printf("\nPor empate gana la banca,");
+            resultado = puntajeBanca;
+        } else {
             printf("\nAl parecer hubo un error.\n");
-            ganador = puntajeBanca;
+            resultado = puntajeBanca;
         }
     }
 
-    return ganador;
+    return resultado;
 }
 
 int repartirPremio(int saldos[], int premios[], int apuestas[], int jugador, int tesoroBanca) {
@@ -179,7 +178,7 @@ int repartirPremio(int saldos[], int premios[], int apuestas[], int jugador, int
 
 int aumentarTesoroBanca(int apuestas[], int jugador, int tesoroBanca) {
     tesoroBanca = apuestas[jugador] + tesoroBanca;
-    printf("\nse le paga a la banca un total de $%d y el tesoro aumenta a $%d\n\n", apuestas[jugador], tesoroBanca);
+    printf("\nSe le paga a la banca un total de $%d y el tesoro aumenta a $%d\n\n", apuestas[jugador], tesoroBanca);
 
     return tesoroBanca;
 }

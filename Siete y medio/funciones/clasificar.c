@@ -1,7 +1,7 @@
 #include "cartas.h"
 
-float clasificarNaipe(int array[], int length, int indice) {
-    int naipe = array[indice];
+float clasificarNaipe(int cartas[], int indice) {
+    int naipe = cartas[indice];
     float naipeDecimal = 1/2.0;
     int divisor = 0;
 
@@ -30,8 +30,8 @@ float clasificarNaipe(int array[], int length, int indice) {
     return 0;
 }
 
-void nombrarCarta(int arrayCartas[], int length, int indice) {
-    int naipe = arrayCartas[indice];
+void nombrarCarta(int cartas[], int indice) {
+    int naipe = cartas[indice];
 
     switch(naipe){
         case 1:
