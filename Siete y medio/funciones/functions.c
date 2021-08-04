@@ -11,9 +11,7 @@ void ordenar(Baraja mazo, int lenghtMazo) {
 void barajar(Baraja mazo, int lengthMazo) {
     int aux, indice;
 
-    // Almacenar una carta en cada position
     for(int i = 0; i<lengthMazo; i++) {
-
         //Genero un numero random
         indice = generarNumeroRandom();
         printf("\nRandom number: %d\n", indice);
@@ -32,10 +30,10 @@ int generarNumeroRandom() {
     srand((unsigned) time(&tiempo));
     numero = rand();
 
-    return (numero % 41) + 1;
+    return ((numero % 41) + 1);
 }
 
-// FUNCIONES DEL JUEGO
+// FUNCIONES RONDA
 int repartirCarta(Baraja mazo, int indice) {
     return mazo[indice];
 }
@@ -65,14 +63,14 @@ float obtenerPuntaje(int cartas[], int numeroApuestas) {
 
 float evaluarPuntaje(float puntaje) {
     if(puntaje<1){
-        printf("Ups! Parece que algo salio mal, el puntaje es invalido.\n");
+        printf("\nUps! Parece que algo salio mal, el puntaje es invalido.\n");
     } else if (puntaje>=1 && puntaje<15/2.0) {
-        printf("Sigue jugando, no pierde la apuesta.\n");
+        printf("\nSigue jugando, no pierde la apuesta.\n");
     } else if (puntaje == 15/2.0) {
-        printf("Sigue jugando, no pierde la apuesta.\n");
+        printf("\nSigue jugando, no pierde la apuesta.\n");
     }
     else {
-        printf("Parece que te has pasado de siete y medio. Perdes la apusta.\n");
+        printf("\nParece que te has pasado de siete y medio. Perdes la apuesta.\n");
         puntaje = NULO;
     }
 
@@ -82,15 +80,15 @@ float evaluarPuntaje(float puntaje) {
 int clasificarPremio(int cartasDelJugador[], int numeroDeCartas, float puntaje) {
     int premio;
 
-    if (puntaje != NULO && numeroDeCartas > 2 ) {
+    if (puntaje!=NULO && numeroDeCartas>2) {
         premio = 25;
-    } else if (puntaje != NULO && numeroDeCartas == 2) {
+    } else if (puntaje!=NULO && numeroDeCartas == 2) {
         if (puntaje == 15/2.0) {
             premio = chequearSieteyMedias(cartasDelJugador);
         } else {
             premio = 25;
         }
-    } else if (puntaje != NULO && numeroDeCartas == 1) {
+    } else if (puntaje!=NULO && numeroDeCartas == 1) {
         premio = 25;
     } else if (puntaje == NULO) {
         premio = NULO;
@@ -126,7 +124,7 @@ int chequearSieteyMedias(int cartasDelJugador[]) {
 }
 
     // Finalizar la ronda
-float definirGanadoresPerdedores(float puntajes[], float puntajeBanca, int jugador) {
+float definirGanadoresPerdedores(float puntajes[], float puntajeBanca, int apuestas[], int jugador) {
     float diferenciaJugador = 0, diferenciaBanca = 0, puntajeJugador, resultado;
 
     puntajeJugador = puntajes[jugador];
@@ -139,15 +137,16 @@ float definirGanadoresPerdedores(float puntajes[], float puntajeBanca, int jugad
         resultado = puntajeBanca;
     } else {
         printf("\nPuntaje del jugador: %.1f", puntajeJugador);
+        printf("\nLa suma de sus apuestas en la ronda fue de $%d\n", apuestas[jugador]);
 
         diferenciaJugador = SIETE_Y_MEDIO - puntajeJugador;
         diferenciaBanca = SIETE_Y_MEDIO - puntajeBanca;
 
-        if(diferenciaBanca < diferenciaJugador){
+        if(diferenciaBanca<diferenciaJugador){
             printf("\nEl jugador %d pierde su apuesta contra la banca.", jugador+1);
             resultado = puntajeBanca;
-        } else if (diferenciaJugador < diferenciaBanca) {
-            printf("\nLa banca debe pagar al jugador %d,", jugador+1);
+        } else if (diferenciaJugador<diferenciaBanca) {
+            printf("\nLa banca debe pagar al jugador %d.", jugador+1);
             resultado = puntajeJugador;
         } else if (diferenciaBanca == diferenciaJugador) {
             printf("\nPor empate gana la banca,");

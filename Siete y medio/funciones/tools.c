@@ -9,9 +9,6 @@ void imprimirArreglo(int arreglo[], int length) {
         }
         printf("%d", arreglo[l]);
     }
-
-
-    //printf("\nEl arreglo en la posicion %d vale: %d \n", 2, arreglo[2]);
 }
 
 void imprimirPosicionesArr(int arreglo[], int length) {

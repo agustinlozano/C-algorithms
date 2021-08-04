@@ -23,7 +23,8 @@ int determinarJugadores() {
     return respuesta;
 }
 
-void mostrarCarta(int cartas[], int indice, char respuesta) {
+void mostrarCarta(int cartas[], int indice) {
+    char respuesta = 'c';
     printf("\nPara ver su carta presione la tecla: [s]");
     printf("\nSu respuesta: ");
     scanf(" %c", &respuesta);
