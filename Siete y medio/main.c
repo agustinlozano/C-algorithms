@@ -2,12 +2,12 @@
 
 int main(void) {
     Baraja mazoPartida = {7, 27, 37, 16, 24, 5, 10, 28, 18, 33, 21, 32, 12};
-    int tesoroBanca = 100000, ronda = 0, cantidadJugadores;
+    int tesoroBanca = 100000, ronda = 0;
     int saldos[MAXIMOS_JUGADORES_POSIBLES];
 
     ejecutarMenuPresentacion();
 
-    cantidadJugadores = determinarJugadores();
+    const int cantidadJugadores = determinarJugadores();
 
     if (cantidadJugadores>=MINIMOS_JUGADORES_POSIBLES && cantidadJugadores<=MAXIMOS_JUGADORES_POSIBLES) {
         printf("El numero de jugadores se ingreso correctamente.\n");
