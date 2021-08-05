@@ -8,6 +8,10 @@
 #define MAXIMOS_JUGADORES_POSIBLES 5
 #define MINIMOS_JUGADORES_POSIBLES 1
 #define MAXIMA_CANTIDAD_RONDAS 4
+#define RONDAS_TEST 2
+
+#define SALDO_INICIAL_JUGADOR 5000
+#define SALDO_TEST 2000
 
 #define BANCA 1
 #define POSIBLES_CARTAS_JUGADOR 8
@@ -26,16 +30,16 @@
 #define CINCO_Y_MEDIO 11/2.0
 #define NULO 0
 #define DESCALIFICADO -1
+#define NULL_VALUE -1
 
 // Definir tipo
 typedef int Baraja[LENGTH];
 
-void barajar(Baraja mazo, int lengthMazo);
-int generarNumeroRandom();
 void ordenar(Baraja mazo, int lengthMazo);
+void mezclarMazo(Baraja mazo);
 
 // Funciones principales
-int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int tesoroBancaPrincipal, int ronda);
+int manejarRonda(Baraja mazo, int numeroJugadores, int saldos[], int tesoroBancaPrincipal, int ronda);
 int repartirCarta(Baraja mazo, int indice);
 int validarMonto(int monto);
 float obtenerPuntaje(int cartas[], int numeroApuestas);
@@ -61,6 +65,7 @@ int ejecutarMenuApuesta(int saldos[], int jugador);
 int ejecutarMenuDesiciones();
 
 // Tools
+void rellenarMazoNulo(int mazo[], int lenght);
 void imprimirArreglo(int arreglo[], int length);
 void imprimirPosicionesArr(int arreglo[], int length);
 void imprimirPosicionesArrFloat(float arreglo[], int length);

@@ -1,5 +1,11 @@
 #include "cartas.h"
 
+void rellenarMazoNulo(int mazo[], int lenght) {
+    for(int i = 0; i<lenght; i++) {
+        mazo[i] = NULL_VALUE;
+    }
+}
+
 void imprimirArreglo(int arreglo[], int length) {
     printf("\n{");
     for (int l = 0; l<length; l++) {
