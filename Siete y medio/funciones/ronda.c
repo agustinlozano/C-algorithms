@@ -1,6 +1,6 @@
 #include "cartas.h"
 
-int manejarRonda(Baraja mazo, int numeroJugadores, int saldos[], int tesoroBancaPrincipal, int ronda) {
+int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int tesoroBancaPrincipal, int ronda) {
     const int cartasPosibles = POSIBLES_CARTAS_JUGADOR*numeroJugadores;
     int cartasRonda[cartasPosibles], apuestas[numeroJugadores], premios[numeroJugadores];
 
