@@ -66,3 +66,29 @@ int ejecutarMenuDesiciones() {
 
     return eleccion;
 }
+
+int mostrarMenuEstadisticaRonda() {
+    int eleccion;
+    printf("\n\n\tEstadisticas de la ronda");
+    printf("\nPor favor, elija una de las siguientes opciones:");
+    printf("\n1. Mostrar saldos");
+    printf("\n2. Mostrar apuestas");
+    printf("\n3. Mostrar puntajes");
+    printf("\n4. Mostrar tesoro de la banca");
+    printf("\n0. pasar de las estadisticas");
+    printf("\nSu respuesta: ");
+    scanf(" %d", &eleccion);
+
+    return eleccion;
+}
+int mostrarMenuEstadisticaPartida() {
+    int eleccion;
+    printf("\n\n\tEstadisticas de la partida");
+    printf("\nPor favor, elija una de las siguientes opciones:");
+    printf("\n1. Mostrar estadisticas de la partida");
+    printf("\n2. Pasar de las estadisticas");
+    printf("\nSu respuesta: ");
+    scanf(" %d", &eleccion);
+
+    return eleccion;
+}
