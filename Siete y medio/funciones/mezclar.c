@@ -18,11 +18,12 @@ void mezclarMazo(Baraja mazo) {
         // Corroboro que este naipe no exista aun en el mazo
         int count = 0;
         for (int i = 0; i<LENGTH; i++) {
-
+            // Si existe no lo agrego
             if (naipeAleatorio == mazo[i]) {
                 break;
             }
             count++;
+            // Si no existia lo agrego
             if (count == LENGTH-1) {
                 mazo[indice] = naipeAleatorio;
                 indice++;
