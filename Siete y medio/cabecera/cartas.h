@@ -32,6 +32,9 @@
 #define DESCALIFICADO -1
 #define NULL_VALUE -1
 
+#define SALIR_MENU_ESTADISTICA 0
+#define VALOR_INICIAL_RESPUESTA 1
+
 // Definir tipo
 typedef int Baraja[LENGTH];
 
@@ -39,7 +42,7 @@ void ordenar(Baraja mazo, int lengthMazo);
 void mezclarMazo(Baraja mazo);
 
 // Funciones principales
-int manejarRonda(Baraja mazo, int numeroJugadores, int saldos[], int tesoroBancaPrincipal, int ronda);
+int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int tesoroBancaPrincipal, int ronda);
 int repartirCarta(Baraja mazo, int indice);
 int validarMonto(int monto);
 float obtenerPuntaje(int cartas[], int numeroApuestas);
@@ -51,7 +54,6 @@ int chequearSieteyMedias(int cartasDelJugador[]);
 float definirGanadoresPerdedores(float puntajes[], float puntajeBanca, int apuestas[], int indice);
 int repartirPremio(int saldos[], int premios[], int apuestas[], int jugador, int tesoroBanca);
 int aumentarTesoroBanca(int apuestas[], int jugador, int tesoroBanca);
-int mostrarMenuEstadistica();
 
 // Clasificar naipes
 float clasificarNaipe(int cartas[], int indice);
@@ -63,12 +65,18 @@ int determinarJugadores();
 void mostrarCarta(int cartas[], int indice);
 int ejecutarMenuApuesta(int saldos[], int jugador);
 int ejecutarMenuDesiciones();
+int mostrarMenuEstadisticaRonda();
+int mostrarMenuEstadisticaPartida();
 
 // Tools
-void rellenarMazoNulo(int mazo[], int lenght);
+    //Para construir el porgrama
 void imprimirArreglo(int arreglo[], int length);
 void imprimirPosicionesArr(int arreglo[], int length);
 void imprimirPosicionesArrFloat(float arreglo[], int length);
+    //Para el usuario final
+void rellenarMazoNulo(int mazo[], int lenght);
+void imprimirEstadisticaInt(int arreglo[], int length);
+void imprimirEstadisticaFloat(float arreglo[], int length);
 void separarBloque();
 #endif
 
