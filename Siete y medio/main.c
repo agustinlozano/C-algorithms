@@ -1,7 +1,8 @@
 #include "cartas.h"
 
 int main(void) {
-    Baraja mazoPartida = {7, 27, 37, 16, 24, 5, 10, 28, 18, 33, 21, 32, 12};
+    Baraja mazoPartida = { 10, 20, 39, 16, 2, 35, 7, 17, 27, 22, 3, 32 };
+    //Baraja mazoPartida;
     int tesoroBanca = 100000, ronda = 0;
     int saldos[MAXIMOS_JUGADORES_POSIBLES];
 
@@ -22,19 +23,19 @@ int main(void) {
     }
 
     for (int i = 0; i<cantidadJugadores; i++) {
-        saldos[i] = 5000;
+        saldos[i] = SALDO_TEST;
         printf("\nSe ha acreditado $5000 en el saldo del jugador %d", i+1);
     }
 
     printf("\n\nTodo listo para comenzar la partida!");
     separarBloque();
 
-    for(int index = 0; index<=MAXIMA_CANTIDAD_RONDAS; index++){
+    for(int index = 0; index<=RONDAS_TEST; index++){
         ronda++;
 
-        if (index == MAXIMA_CANTIDAD_RONDAS) {
+        if (index == RONDAS_TEST) {
             printf("\n\n\tFin de la partida!");
-        } else if (index == MAXIMA_CANTIDAD_RONDAS-1) {
+        } else if (index == RONDAS_TEST-1) {
             printf("\n\n\tUltima ronda!");
             tesoroBanca = manejarRonda(mazoPartida, cantidadJugadores, saldos, tesoroBanca, ronda);
         } else {
