@@ -8,21 +8,6 @@ void ordenar(Baraja mazo, int lenghtMazo) {
     }
 }
 
-void barajar(Baraja mazo, int lengthMazo) {
-    int aux, indice;
-
-    for(int i = 0; i<lengthMazo; i++) {
-        //Genero un numero random
-        indice = generarNumeroRandom();
-        printf("\nRandom number: %d\n", indice);
-
-        //Intercambio valores
-        aux = mazo[i];
-        mazo[i] = mazo[indice];
-        mazo[indice] = aux;
-    }
-}
-
 int generarNumeroRandom() {
     int numero;
 
@@ -106,18 +91,57 @@ int chequearSieteyMedias(int cartasDelJugador[]) {
     segundaCarta = cartasDelJugador[1];
 
 
-    if (primerCarta == 7 && segundaCarta == 10) {
-        premio = 100;
-    } else if (primerCarta == 7 && (segundaCarta == 8 || segundaCarta == 9 || segundaCarta == 10)) {
-        premio = 75;
-    } else if (primerCarta == 17 && (segundaCarta == 18 || segundaCarta == 19 || segundaCarta == 20)) {
-        premio = 75;
-    } else if (primerCarta == 27 && (segundaCarta == 28 || segundaCarta == 29 || segundaCarta == 30)) {
-        premio = 75;
-    } else if (primerCarta == 37 && (segundaCarta == 38 || segundaCarta == 39 || segundaCarta == 40)) {
-        premio = 75;
-    } else {
-        premio = 50;
+    if (primerCarta == 7 || primerCarta == 17 || primerCarta == 27 || primerCarta == 37) {
+        // La primera carta es un siete de algun tipo
+        // y la segunda debe ser necesariamente una figura
+
+        if (primerCarta == 7 && segundaCarta == 10) {
+            premio = 100;
+        } else if (primerCarta == 7 && (segundaCarta == 7 || segundaCarta == 8 || segundaCarta == 9 || segundaCarta == 10)) {
+            premio = 75;
+        } else if (primerCarta == 17 && (segundaCarta == 18 || segundaCarta == 19 || segundaCarta == 20)) {
+            premio = 75;
+        } else if (primerCarta == 27 && (segundaCarta == 28 || segundaCarta == 29 || segundaCarta == 30)) {
+            premio = 75;
+        } else if (primerCarta == 37 && (segundaCarta == 38 || segundaCarta == 39 || segundaCarta == 40)) {
+            premio = 75;
+        } else {
+            premio = 50;
+        }
+
+    } else if (primerCarta == 8 || primerCarta == 9 || primerCarta == 10) {
+        // La primera carta es una figura de oro
+        if (primerCarta == 10 && segundaCarta == 7) {
+            premio = 100;
+        } else if (segundaCarta == 7) {
+            premio = 75;
+        } else {
+            premio = 50;
+        }
+
+    } else if (primerCarta == 18 || primerCarta == 19 || primerCarta == 20) {
+        // La primera carta es una figura de espada
+        if (segundaCarta == 17) {
+            premio = 75;
+        } else {
+            premio = 50;
+        }
+
+    } else if (primerCarta == 28 || primerCarta == 29 || primerCarta == 30) {
+        // La primera carta es una figura de copas
+        if (segundaCarta == 27) {
+            premio = 75;
+        } else {
+            premio = 50;
+        }
+
+    } else if (primerCarta == 38 || primerCarta == 39 || primerCarta == 40) {
+        // La primera carta es una figura de basto
+        if (segundaCarta == 37) {
+            premio = 75;
+        } else {
+            premio = 50;
+        }
     }
 
     return premio;
