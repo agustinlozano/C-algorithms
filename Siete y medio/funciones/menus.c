@@ -86,7 +86,7 @@ int mostrarMenuEstadisticaPartida() {
     printf("\n\n\tEstadisticas de la partida");
     printf("\nPor favor, elija una de las siguientes opciones:");
     printf("\n1. Mostrar estadisticas de la partida");
-    printf("\n2. Pasar de las estadisticas");
+    printf("\n0. Pasar de las estadisticas");
     printf("\nSu respuesta: ");
     scanf(" %d", &eleccion);
 
