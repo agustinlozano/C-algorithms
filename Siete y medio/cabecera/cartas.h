@@ -7,9 +7,11 @@
 #define LENGTH 40
 #define MAXIMOS_JUGADORES_POSIBLES 5
 #define MINIMOS_JUGADORES_POSIBLES 1
+#define GANANCIA_INICIAL 0
 #define MAXIMA_CANTIDAD_RONDAS 4
 #define RONDAS_TEST 2
 
+#define TESORO_INICIAL_BANCA 100000
 #define SALDO_INICIAL_JUGADOR 5000
 #define SALDO_TEST 2000
 
@@ -26,6 +28,7 @@
 #define PEDIR_CARTA 1
 #define PLANTARSE 2
 
+#define VALOR_FIGURA 1/2.0
 #define SIETE_Y_MEDIO 15/2.0
 #define CINCO_Y_MEDIO 11/2.0
 #define NULO 0
@@ -42,7 +45,7 @@ void ordenar(Baraja mazo, int lengthMazo);
 void mezclarMazo(Baraja mazo);
 
 // Funciones principales
-int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int tesoroBancaPrincipal, int ronda);
+int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganancias[], int tesoroBancaPrincipal, int ronda);
 int repartirCarta(Baraja mazo, int indice);
 int validarMonto(int monto);
 float obtenerPuntaje(int cartas[], int numeroApuestas);
@@ -52,8 +55,12 @@ int chequearSieteyMedias(int cartasDelJugador[]);
 
 // Finalizar ronda
 float definirGanadoresPerdedores(float puntajes[], float puntajeBanca, int apuestas[], int indice);
-int repartirPremio(int saldos[], int premios[], int apuestas[], int jugador, int tesoroBanca);
+int repartirPremio(int saldos[], int premios[], int apuestas[], int ganancias[], int jugador, int tesoroBanca);
 int aumentarTesoroBanca(int apuestas[], int jugador, int tesoroBanca);
+
+// Estadistica final
+int ejecutarEstadisticaFinal(int ganancias[], int tesoroBanca, const int numeroJugadores);
+void obtenerMayorGanacia(int ganancias[], int tesoroBanca, const int numeroJugadores);
 
 // Clasificar naipes
 float clasificarNaipe(int cartas[], int indice);
