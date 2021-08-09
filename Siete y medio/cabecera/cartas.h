@@ -28,6 +28,9 @@
 #define PEDIR_CARTA 1
 #define PLANTARSE 2
 
+#define POSICION_APUESTA 0
+#define POSICION_JUGADOR 1
+
 #define VALOR_FIGURA 1/2.0
 #define SIETE_Y_MEDIO 15/2.0
 #define CINCO_Y_MEDIO 11/2.0
@@ -45,7 +48,7 @@ void ordenar(Baraja mazo, int lengthMazo);
 void mezclarMazo(Baraja mazo);
 
 // Funciones principales
-int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganancias[], int tesoroBancaPrincipal, int ronda);
+int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganancias[], int mayorApuestas[], int tesoroBancaPrincipal, int ronda);
 int repartirCarta(Baraja mazo, int indice);
 int validarMonto(int monto);
 float obtenerPuntaje(int cartas[], int numeroApuestas);
@@ -59,7 +62,7 @@ int repartirPremio(int saldos[], int premios[], int apuestas[], int ganancias[],
 int aumentarTesoroBanca(int apuestas[], int jugador, int tesoroBanca);
 
 // Estadistica final
-int ejecutarEstadisticaFinal(int ganancias[], int tesoroBanca, const int numeroJugadores);
+int ejecutarEstadisticaFinal(int ganancias[], int mayorApuesta[], int tesoroBanca, const int numeroJugadores);
 void obtenerMayorGanacia(int ganancias[], int tesoroBanca, const int numeroJugadores);
 
 // Clasificar naipes
@@ -77,6 +80,7 @@ int mostrarMenuEstadisticaPartida();
 
 // Tools
     //Para construir el porgrama
+void rellenarArreglo(int arreglo[], int length, int value);
 void imprimirArreglo(int arreglo[], int length);
 void imprimirPosicionesArr(int arreglo[], int length);
 void imprimirPosicionesArrFloat(float arreglo[], int length);

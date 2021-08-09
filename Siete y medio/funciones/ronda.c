@@ -1,6 +1,6 @@
 #include "cartas.h"
 
-int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganancias[], int tesoroBancaPrincipal, int ronda) {
+int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int gananciasPartida[], int mayorApuesta[], int tesoroBancaPrincipal, int ronda) {
     const int cartasPosibles = POSIBLES_CARTAS_JUGADOR*numeroJugadores;
     int cartasRonda[cartasPosibles], apuestas[numeroJugadores], premios[numeroJugadores];
 
@@ -60,6 +60,12 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
             apuestas[j] = apuestas[j] + montoApuesta;
             printf("Exito: su desicion para la apuesta fue efectuada.\n");
             printf("\nEl saldo del jugador %d ahora es: %d\n", j+1, saldos[j]);
+
+            if (montoApuesta>mayorApuesta[POSICION_APUESTA]) {
+                mayorApuesta[POSICION_APUESTA] = montoApuesta;
+                mayorApuesta[POSICION_JUGADOR] = j;
+                printf("\nmayor apuesta: %d\n", mayorApuesta[0]); //QUITAR
+            }
         }
 
         int respuestaApuesta = 0;
@@ -108,6 +114,12 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                     apuestas[j] = apuestas[j] + montoApuesta;
                     printf("Exito: su desicion para la apuesta fue efectuada.\n");
                     printf("\nEl saldo del jugador %d ahora es: %d\n", j+1, saldos[j]);
+
+                    if (montoApuesta>mayorApuesta[POSICION_APUESTA]) {
+                        mayorApuesta[POSICION_APUESTA] = montoApuesta;
+                        mayorApuesta[POSICION_JUGADOR] = j;
+                        printf("\nmayor apuesta: %d\n", mayorApuesta[0]); //QUITAR
+                    }
                 }
             }
         }
@@ -175,7 +187,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                 printf("\nJugador %d no recibe pago porque esta descalificado.\n\n", i+1);
             } else {
                 printf("\nJugador %d recibe su pago.", i+1);
-                tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, ganancias, i, tesoroBancaLocal);
+                tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, gananciasPartida, i, tesoroBancaLocal);
             }
         }
     } else {
@@ -190,7 +202,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                 printf("\n.\n");
             } else {
                 printf("\ny la bonificacion correspondiente para el es: %d\n", premios[i]);
-                tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, ganancias, i, tesoroBancaLocal);
+                tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, gananciasPartida, i, tesoroBancaLocal);
             }
         }
     }
@@ -242,7 +254,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
         switch (respuestaEstadistica) {
             case 1:
                 printf("\nEstadisticas de la partida:\n");
-                ejecutarEstadisticaFinal(ganancias, tesoroBancaLocal, numeroJugadores);
+                ejecutarEstadisticaFinal(gananciasPartida, mayorApuesta, tesoroBancaLocal, numeroJugadores);
                 separarBloque();
                 break;
             case SALIR_MENU_ESTADISTICA:
