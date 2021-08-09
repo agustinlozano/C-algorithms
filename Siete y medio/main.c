@@ -1,10 +1,10 @@
 #include "cartas.h"
 
 int main(void) {
-    Baraja mazoPartida = { 10, 20, 39, 16, 2, 35, 7, 17, 27, 22, 3, 32 };
+    Baraja mazoPartida = { 10, 21, 32, 16, 2, 35, 7, 17, 27, 22, 3, 32 };
     //Baraja mazoPartida;
     int tesoroBanca = 100000, ronda = 0;
-    int saldos[MAXIMOS_JUGADORES_POSIBLES];
+    int saldos[MAXIMOS_JUGADORES_POSIBLES], ganancias[MAXIMOS_JUGADORES_POSIBLES];
 
     ejecutarMenuPresentacion();
 
@@ -27,6 +27,10 @@ int main(void) {
         printf("\nSe ha acreditado $5000 en el saldo del jugador %d", i+1);
     }
 
+    for (int i = 0; i<MAXIMOS_JUGADORES_POSIBLES; i++) {
+        ganancias[i] = GANANCIA_INICIAL;
+    }
+
     printf("\n\nTodo listo para comenzar la partida!");
     separarBloque();
 
@@ -37,10 +41,10 @@ int main(void) {
             printf("\n\n\tFin de la partida!");
         } else if (index == RONDAS_TEST-1) {
             printf("\n\n\tUltima ronda!");
-            tesoroBanca = manejarRonda(mazoPartida, cantidadJugadores, saldos, tesoroBanca, ronda);
+            tesoroBanca = manejarRonda(mazoPartida, cantidadJugadores, saldos, ganancias, tesoroBanca, ronda);
         } else {
             printf("\n\n\tRonda numero %d\n", ronda);
-            tesoroBanca = manejarRonda(mazoPartida, cantidadJugadores, saldos, tesoroBanca, ronda);
+            tesoroBanca = manejarRonda(mazoPartida, cantidadJugadores, saldos, ganancias, tesoroBanca, ronda);
 
             printf("\nMomento de la siguiente ronda!\n");
         }
