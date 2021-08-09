@@ -184,7 +184,7 @@ float definirGanadoresPerdedores(float puntajes[], float puntajeBanca, int apues
     return resultado;
 }
 
-int repartirPremio(int saldos[], int premios[], int apuestas[], int jugador, int tesoroBanca) {
+int repartirPremio(int saldos[], int premios[], int apuestas[], int ganancias[], int jugador, int tesoroBanca) {
     int gananciaJugador, saldojugador;
 
     gananciaJugador = (premios[jugador] * apuestas[jugador]) / 100;
@@ -195,6 +195,8 @@ int repartirPremio(int saldos[], int premios[], int apuestas[], int jugador, int
 
     printf("\nSu ganancia ha sido de $%d y su saldo final aumenta a $%d.\n", gananciaJugador, saldos[jugador]);
     printf("\nla banca disminuye su tesoro a $%d\n\n", tesoroBanca);
+
+    ganancias[jugador] = ganancias[jugador] + gananciaJugador;
 
     return tesoroBanca;
 }

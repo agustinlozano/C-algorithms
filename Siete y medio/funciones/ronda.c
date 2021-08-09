@@ -1,6 +1,6 @@
 #include "cartas.h"
 
-int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int tesoroBancaPrincipal, int ronda) {
+int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganancias[], int tesoroBancaPrincipal, int ronda) {
     const int cartasPosibles = POSIBLES_CARTAS_JUGADOR*numeroJugadores;
     int cartasRonda[cartasPosibles], apuestas[numeroJugadores], premios[numeroJugadores];
 
@@ -142,6 +142,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int tesor
              indiceMazo++;
         }
         if(puntajeBanca == CINCO_Y_MEDIO) {
+            printf("\n5-La banca pide carta.");
             cartasRonda[indiceMazo] = repartirCarta(mazo, indiceMazo);
             printf("\n");
             nombrarCarta(cartasRonda, indiceMazo);
@@ -159,7 +160,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int tesor
     separarBloque();
 
         //ACABAR LA RONDA
-    printf("\nFinalmente la banca suma un puntaje de %1.f puntos.\n", puntajeBanca);
+    printf("\nFinalmente la banca suma un puntaje de %.1f puntos.\n", puntajeBanca);
 
     if (puntajeBanca>SIETE_Y_MEDIO) {
         printf("\n\tLa banca se paso, paga a los jugadores!\n");
@@ -174,12 +175,12 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int tesor
                 printf("\nJugador %d no recibe pago porque esta descalificado.\n\n", i+1);
             } else {
                 printf("\nJugador %d recibe su pago.", i+1);
-                tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, i, tesoroBancaLocal);
+                tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, ganancias, i, tesoroBancaLocal);
             }
         }
     } else {
         puntajes[numeroJugadores] = puntajeBanca;
-        for (int i = NULO; i<numeroJugadores; i++) {
+        for (int i = 0; i<numeroJugadores; i++) {
             printf("\n\tVeamos como le fue al jugador %d con respecto a la banca:", i+1);
             float resultado = definirGanadoresPerdedores(puntajes, puntajeBanca, apuestas, i);
 
@@ -189,7 +190,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int tesor
                 printf("\n.\n");
             } else {
                 printf("\ny la bonificacion correspondiente para el es: %d\n", premios[i]);
-                tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, i, tesoroBancaLocal);
+                tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, ganancias, i, tesoroBancaLocal);
             }
         }
     }
@@ -234,24 +235,23 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int tesor
     }
 
     respuestaEstadistica = VALOR_INICIAL_RESPUESTA;
-    if (ronda == 2) {
-        while (respuestaEstadistica != SALIR_MENU_ESTADISTICA) {
-            respuestaEstadistica = mostrarMenuEstadisticaPartida();
 
-            switch (respuestaEstadistica) {
-                case 1:
-                    printf("\nEstadisticas de la partida:\n");
-                    // Ejecutar una funcion
-                    separarBloque();
-                    break;
-                case SALIR_MENU_ESTADISTICA:
-                    printf("\nPasar de las estadisticas.\n");
-                    separarBloque();
-                    break;
-                default:
-                    printf("\nUps! Parece que hubo un error.");
-                    separarBloque();
-            }
+    if (ronda == 2) {
+        respuestaEstadistica = mostrarMenuEstadisticaPartida();
+
+        switch (respuestaEstadistica) {
+            case 1:
+                printf("\nEstadisticas de la partida:\n");
+                ejecutarEstadisticaFinal(ganancias, tesoroBancaLocal, numeroJugadores);
+                separarBloque();
+                break;
+            case SALIR_MENU_ESTADISTICA:
+                printf("\nPasar de las estadisticas.\n");
+                separarBloque();
+                break;
+            default:
+                printf("\nUps! Parece que hubo un error.");
+                separarBloque();
         }
     }
 
