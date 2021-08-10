@@ -13,7 +13,7 @@
 
 #define TESORO_INICIAL_BANCA 100000
 #define SALDO_INICIAL_JUGADOR 5000
-#define SALDO_TEST 2000
+#define SALDO_TEST 1000
 
 #define BANCA 1
 #define POSIBLES_CARTAS_JUGADOR 8
@@ -36,7 +36,6 @@
 #define CINCO_Y_MEDIO 11/2.0
 #define NULO 0
 #define DESCALIFICADO -1
-#define NULL_VALUE -1
 
 #define SALIR_MENU_ESTADISTICA 0
 #define VALOR_INICIAL_RESPUESTA 1
@@ -62,7 +61,6 @@ int repartirPremio(int saldos[], int premios[], int apuestas[], int ganancias[],
 int aumentarTesoroBanca(int apuestas[], int jugador, int tesoroBanca);
 
 // Estadistica final
-int ejecutarEstadisticaFinal(int ganancias[], int mayorApuesta[], int tesoroBanca, const int numeroJugadores);
 void obtenerMayorGanacia(int ganancias[], int tesoroBanca, const int numeroJugadores);
 
 // Clasificar naipes
@@ -80,11 +78,11 @@ int mostrarMenuEstadisticaPartida();
 
 // Tools
     //Para construir el porgrama
-void rellenarArreglo(int arreglo[], int length, int value);
 void imprimirArreglo(int arreglo[], int length);
 void imprimirPosicionesArr(int arreglo[], int length);
 void imprimirPosicionesArrFloat(float arreglo[], int length);
     //Para el usuario final
+void rellenarArreglo(int arreglo[], int length, int value);
 void rellenarMazoNulo(int mazo[], int lenght);
 void imprimirEstadisticaInt(int arreglo[], int length);
 void imprimirEstadisticaFloat(float arreglo[], int length);
