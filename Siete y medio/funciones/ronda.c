@@ -27,114 +27,114 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
         // COMIENZO SEGUNDO FOR
     printf("\n");
     for(int j = 0; j<numeroJugadores; j++) {
-     if (saldos[j]<MINIMA_APUESTA) {
-        printf("\n\nEl jugador %d no tiene dinero suficiente para jugar esta ronda.\n\n", j+1);
-        puntajes[j] = DESCALIFICADO;
-        apuestas[j] = NULO;
-        premios[j] = NULO;
-        separarBloque();
-     } else {
-        int indiceJugador = 0;
-        int cartasDelJugador[POSIBLES_CARTAS_JUGADOR];
+        if (saldos[j]<MINIMA_APUESTA) {
+            printf("\n\nEl jugador %d no tiene dinero suficiente para jugar esta ronda.\n\n", j+1);
+            puntajes[j] = DESCALIFICADO;
+            apuestas[j] = NULO;
+            premios[j] = NULO;
+            separarBloque();
+        } else {
+            int indiceJugador = 0;
+            int cartasDelJugador[POSIBLES_CARTAS_JUGADOR];
 
-        cartasDelJugador[indiceJugador] = cartasRonda[j];
-        indiceJugador++;
+            cartasDelJugador[indiceJugador] = cartasRonda[j];
+            indiceJugador++;
 
-        printf("\n\n\tEs el turno del jugador %d", j+1);
-        mostrarCarta(cartasRonda, j);
+            printf("\n\n\tEs el turno del jugador %d", j+1);
+            mostrarCarta(cartasRonda, j);
 
-        // Apuesta
-        apuestas[j] = 0;
-        printf("\n\n\tLlego la hora de apostar");
-        printf("\nSu saldo actual es de $%d\n", saldos[j]);
+            // Apuesta
+            apuestas[j] = 0;
+            printf("\n\n\tLlego la hora de apostar");
+            printf("\nSu saldo actual es de $%d\n", saldos[j]);
 
-        int montoApuesta = ejecutarMenuApuesta(saldos, j);
+            int montoApuesta = ejecutarMenuApuesta(saldos, j);
 
-        if (montoApuesta == APUESTA_INVALIDA) {
-            printf("ERROR: no puede realizar esta apuesta a causa de que no tiene dinero suficiente.\n");
-            apuestas[j] = apuestas[j] + APUESTA_NULA;
-        } else if (montoApuesta == APUESTA_NULA) {
-            printf("No se realiza ninguna apuesta.\n");
-            apuestas[j] = apuestas[j] + APUESTA_NULA;
-        }else {
-            apuestas[j] = apuestas[j] + montoApuesta;
-            printf("Exito: su desicion para la apuesta fue efectuada.\n");
-            printf("\nEl saldo del jugador %d ahora es: %d\n", j+1, saldos[j]);
+            if (montoApuesta == APUESTA_INVALIDA) {
+                printf("ERROR: no puede realizar esta apuesta a causa de que no tiene dinero suficiente.\n");
+                apuestas[j] = apuestas[j] + APUESTA_NULA;
+            } else if (montoApuesta == APUESTA_NULA) {
+                printf("No se realiza ninguna apuesta.\n");
+                apuestas[j] = apuestas[j] + APUESTA_NULA;
+            }else {
+                apuestas[j] = apuestas[j] + montoApuesta;
+                printf("Exito: su desicion para la apuesta fue efectuada.\n");
+                printf("\nEl saldo del jugador %d ahora es: %d\n", j+1, saldos[j]);
 
-            if (montoApuesta>mayorApuesta[POSICION_APUESTA]) {
-                mayorApuesta[POSICION_APUESTA] = montoApuesta;
-                mayorApuesta[POSICION_JUGADOR] = j;
-                printf("\nmayor apuesta: %d\n", mayorApuesta[0]); //QUITAR
-            }
-        }
-
-        int respuestaApuesta = 0;
-        float puntaje = 0;
-
-        separarBloque();
-
-        printf("\n\tEs momento para tomar una desicion!");
-        while(respuestaApuesta != PLANTARSE) {
-
-            respuestaApuesta = ejecutarMenuDesiciones();
-
-            switch(respuestaApuesta){
-                case PEDIR_CARTA:
-                    cartasDelJugador[indiceJugador] = repartirCarta(mazo, indiceMazo);
-                    cartasRonda[indiceMazo] = cartasDelJugador[indiceJugador];
-
-                    indiceMazo++;
-                    indiceJugador++;
-
-                    printf("\nSe entrego una carta al jugador %d", j+1);
-                    printf("\nAhora veamos sus cartas\n\n");
-                    puntaje = obtenerPuntaje(cartasDelJugador, indiceJugador);
-                    break;
-                case PLANTARSE:
-                    printf("\nEl jugador se planta.");
-                    printf("\nVeamos sus cartas y luego calculemos el puntaje.\n");
-                    puntaje = obtenerPuntaje(cartasDelJugador, indiceJugador);
-                    break;
+                if (montoApuesta>mayorApuesta[POSICION_APUESTA]) {
+                    mayorApuesta[POSICION_APUESTA] = montoApuesta;
+                    mayorApuesta[POSICION_JUGADOR] = j;
+                    printf("\nmayor apuesta: %d\n", mayorApuesta[0]); //QUITAR
+                }
             }
 
-            printf("Y su puntaje es: %.1f\n", puntaje);
-            puntaje = evaluarPuntaje(puntaje);
+            int respuestaApuesta = 0;
+            float puntaje = 0;
 
-            if (puntaje == NULO || respuestaApuesta == PLANTARSE) {
-                break;
-            } else {
-                printf("\n\tDesea seguir apostando?");
+            separarBloque();
 
-                montoApuesta = ejecutarMenuApuesta(saldos, j);
+            printf("\n\tEs momento para tomar una desicion!");
+            while(respuestaApuesta != PLANTARSE) {
 
-                if (montoApuesta == APUESTA_INVALIDA) {
-                    printf("\nERROR: no puede realizar esta apuesta a causa de que no tiene dinero suficiente.\n");
-                    apuestas[j] = apuestas[j] + APUESTA_NULA;
+                respuestaApuesta = ejecutarMenuDesiciones();
+
+                switch(respuestaApuesta){
+                    case PEDIR_CARTA:
+                        cartasDelJugador[indiceJugador] = repartirCarta(mazo, indiceMazo);
+                        cartasRonda[indiceMazo] = cartasDelJugador[indiceJugador];
+
+                        indiceMazo++;
+                        indiceJugador++;
+
+                        printf("\nSe entrego una carta al jugador %d", j+1);
+                        printf("\nAhora veamos sus cartas\n\n");
+                        puntaje = obtenerPuntaje(cartasDelJugador, indiceJugador);
+                        break;
+                    case PLANTARSE:
+                        printf("\nEl jugador se planta.");
+                        printf("\nVeamos sus cartas y luego calculemos el puntaje.\n");
+                        puntaje = obtenerPuntaje(cartasDelJugador, indiceJugador);
+                        break;
+                }
+
+                printf("Y su puntaje es: %.1f\n", puntaje);
+                puntaje = evaluarPuntaje(puntaje);
+
+                if (puntaje == NULO || respuestaApuesta == PLANTARSE) {
+                    break;
                 } else {
-                    apuestas[j] = apuestas[j] + montoApuesta;
-                    printf("Exito: su desicion para la apuesta fue efectuada.\n");
-                    printf("\nEl saldo del jugador %d ahora es: %d\n", j+1, saldos[j]);
+                    printf("\n\tDesea seguir apostando?");
 
-                    if (montoApuesta>mayorApuesta[POSICION_APUESTA]) {
-                        mayorApuesta[POSICION_APUESTA] = montoApuesta;
-                        mayorApuesta[POSICION_JUGADOR] = j;
-                        printf("\nmayor apuesta: %d\n", mayorApuesta[0]); //QUITAR
+                    montoApuesta = ejecutarMenuApuesta(saldos, j);
+
+                    if (montoApuesta == APUESTA_INVALIDA) {
+                        printf("\nERROR: no puede realizar esta apuesta a causa de que no tiene dinero suficiente.\n");
+                        apuestas[j] = apuestas[j] + APUESTA_NULA;
+                    } else {
+                        apuestas[j] = apuestas[j] + montoApuesta;
+                        printf("Exito: su desicion para la apuesta fue efectuada.\n");
+                        printf("\nEl saldo del jugador %d ahora es: %d\n", j+1, saldos[j]);
+
+                        if (montoApuesta>mayorApuesta[POSICION_APUESTA]) {
+                            mayorApuesta[POSICION_APUESTA] = montoApuesta;
+                            mayorApuesta[POSICION_JUGADOR] = j;
+                            printf("\nmayor apuesta: %d\n", mayorApuesta[0]); //QUITAR
+                        }
                     }
                 }
             }
-        }
 
-        respuestaApuesta = 0;
-        puntajes[j] = puntaje;
-        premios[j] = clasificarPremio(cartasDelJugador, indiceJugador, puntaje);
+            respuestaApuesta = 0;
+            puntajes[j] = puntaje;
+            premios[j] = clasificarPremio(cartasDelJugador, indiceJugador, puntaje);
 
-        if (premios[j] == NULO) {
-            printf("El usuario se paso, su bonificacion es cero.\n");
-        } else {
-            printf("\nLa bonificacion del jugador %d por su combinacion de cartas es: %d\n", j+1, premios[j]);
+            if (premios[j] == NULO) {
+                printf("El usuario se paso, su bonificacion es cero.\n");
+            } else {
+                printf("\nLa bonificacion del jugador %d por su combinacion de cartas es: %d\n", j+1, premios[j]);
+            }
+            separarBloque();
         }
-        separarBloque();
-     }
     }
 
         // BANCA
@@ -199,7 +199,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
             if (resultado == puntajeBanca) {
                 tesoroBancaLocal = aumentarTesoroBanca(apuestas, i, tesoroBancaLocal);
             } else if (resultado == DESCALIFICADO) {
-                printf("\n.\n");
+                printf("\n\n");
             } else {
                 printf("\ny la bonificacion correspondiente para el es: %d\n", premios[i]);
                 tesoroBancaLocal = repartirPremio(saldos, premios, apuestas, gananciasPartida, i, tesoroBancaLocal);
@@ -254,7 +254,9 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
         switch (respuestaEstadistica) {
             case 1:
                 printf("\nEstadisticas de la partida:\n");
-                ejecutarEstadisticaFinal(gananciasPartida, mayorApuesta, tesoroBancaLocal, numeroJugadores);
+                obtenerMayorGanacia(gananciasPartida, tesoroBancaLocal, numeroJugadores);
+                printf("La mayor apuesta fue de $%d, y fue efectuada por el jugador %d",
+                        mayorApuesta[0], mayorApuesta[1]+1);
                 separarBloque();
                 break;
             case SALIR_MENU_ESTADISTICA:
