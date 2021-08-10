@@ -1,21 +1,9 @@
 #include "cartas.h"
-#include <time.h>
 
 void ordenar(Baraja mazo, int lenghtMazo) {
-
     for(int i = 0; i<lenghtMazo; i++) {
         mazo[i] = (i+1);
     }
-}
-
-int generarNumeroRandom() {
-    int numero;
-
-    time_t tiempo;
-    srand((unsigned) time(&tiempo));
-    numero = rand();
-
-    return ((numero % 41) + 1);
 }
 
 // FUNCIONES RONDA
