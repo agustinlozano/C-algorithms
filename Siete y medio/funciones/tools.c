@@ -1,8 +1,14 @@
 #include "cartas.h"
 
+void rellenarArreglo(int arreglo[], int length, int value) {
+    for (int i = 0; i<length; i++) {
+        arreglo[i] = value;
+    }
+}
+
 void rellenarMazoNulo(int mazo[], int lenght) {
     for(int i = 0; i<lenght; i++) {
-        mazo[i] = NULL_VALUE;
+        mazo[i] = NULO;
     }
 }
 
@@ -38,7 +44,7 @@ void imprimirEstadisticaInt(int arreglo[], int length) {
     for (int i = 0; i<length; i++) {
         valor = arreglo[i];
         if (valor == NULO) {
-            printf("Valor nulo para el jugador %d.\n", i+1);
+            printf("Valor nulo para el jugador %d\n", i+1);
             continue;
         } else {
             printf("Para el jugador %d es: %d\n", i+1, valor);
@@ -63,7 +69,7 @@ void imprimirEstadisticaFloat(float arreglo[], int length) {
             printf("El jugador %d ha sido descalificado.\n", i+1);
             continue;
         } else if (valor == NULO) {
-            printf("Valor nulo para el jugador %d.\n", i+1);
+            printf("Valor nulo para el jugador %d\n", i+1);
             continue;
         } else {
             printf("Para el jugador %d es: %.1f\n", i+1, valor);
