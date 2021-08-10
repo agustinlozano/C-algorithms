@@ -7,7 +7,7 @@ void rellenarArreglo(int arreglo[], int length, int value) {
 }
 
 void rellenarMazoNulo(int mazo[], int lenght) {
-    for(int i = 0; i<lenght; i++) {
+    for (int i = 0; i<lenght; i++) {
         mazo[i] = NULO;
     }
 }

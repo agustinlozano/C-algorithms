@@ -39,7 +39,7 @@ float clasificarNaipe(int cartas[], int jugador) {
 void nombrarCarta(int cartas[], int indice) {
     int naipe = cartas[indice];
 
-    switch(naipe){
+    switch (naipe) {
         case 1:
         case 2:
         case 3:
@@ -50,19 +50,19 @@ void nombrarCarta(int cartas[], int indice) {
         case 8:
         case 9:
         case 10:
-            if(naipe<8) {
+            if (naipe<8) {
                 printf("La carta es un %d de oro\n", naipe);
             }
 
-            if(naipe == 8) {
+            if (naipe == 8) {
                 printf("La carta es una sota de oro\n");
             }
 
-            if(naipe == 9) {
+            if (naipe == 9) {
                 printf("La carta es un caballo de oro\n");
             }
 
-            if(naipe == 10) {
+            if (naipe == 10) {
                 printf("La carta es un rey de oro\n");
             }
             break;
@@ -77,19 +77,19 @@ void nombrarCarta(int cartas[], int indice) {
         case 18:
         case 19:
         case 20:
-            if(naipe<18) {
+            if (naipe<18) {
                 printf("La carta es un %d de espada\n", naipe%10);
             }
 
-            if(naipe == 18) {
+            if (naipe == 18) {
                 printf("La carta es una sota de espada\n");
             }
 
-            if(naipe == 19) {
+            if (naipe == 19) {
                 printf("La carta es un caballo de espada\n");
             }
 
-            if(naipe == 20) {
+            if (naipe == 20) {
                 printf("La carta es un rey de espada\n");
             }
             break;
@@ -104,19 +104,19 @@ void nombrarCarta(int cartas[], int indice) {
         case 28:
         case 29:
         case 30:
-            if(naipe<28) {
+            if (naipe<28) {
                 printf("La carta es un %d de copas\n", naipe%20);
             }
 
-            if(naipe == 28) {
+            if (naipe == 28) {
                 printf("La carta es una sota de copas\n");
             }
 
-            if(naipe == 29) {
+            if (naipe == 29) {
                 printf("La carta es un caballo de copas\n");
             }
 
-            if(naipe == 30) {
+            if (naipe == 30) {
                 printf("La carta es un rey de copas\n");
             }
             break;
@@ -131,19 +131,19 @@ void nombrarCarta(int cartas[], int indice) {
         case 38:
         case 39:
         case 40:
-            if(naipe<38) {
+            if (naipe<38) {
                 printf("La carta es un %d de basto\n", naipe%30);
             }
 
-            if(naipe == 38) {
+            if (naipe == 38) {
                 printf("La carta es una sota de basto\n");\
             }
 
-            if(naipe == 39) {
+            if (naipe == 39) {
                 printf("La carta es un caballo de basto\n");
             }
 
-            if(naipe == 40) {
+            if (naipe == 40) {
                 printf("La carta es un rey de basto\n");
             }
             break;

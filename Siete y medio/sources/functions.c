@@ -12,7 +12,7 @@ int repartirCarta(Baraja mazo, int indice) {
 }
 
 int validarMonto(int monto) {
-    if(monto>=MINIMA_APUESTA && monto<=MAXIMA_APUESTA){
+    if (monto>=MINIMA_APUESTA && monto<=MAXIMA_APUESTA) {
         printf("\nUsted pretende ingresar un monto por $%d\n", monto);
     } else if (monto == APUESTA_NULA) {
         printf("\nUsted ha decidido no apostar.\n");
@@ -26,7 +26,7 @@ int validarMonto(int monto) {
 
 float obtenerPuntaje(int cartas[], int numeroApuestas) {
     float suma = 0;
-    for(int i = 0; i<numeroApuestas; i++){
+    for (int i = 0; i<numeroApuestas; i++) {
         nombrarCarta(cartas, i);
         suma = suma + clasificarNaipe(cartas, i);
     }
@@ -35,7 +35,7 @@ float obtenerPuntaje(int cartas[], int numeroApuestas) {
 }
 
 float evaluarPuntaje(float puntaje) {
-    if(puntaje<1){
+    if (puntaje<1) {
         printf("\nUps! Parece que algo salio mal, el puntaje es invalido.\n");
     } else if (puntaje>=1 && puntaje<15/2.0) {
         printf("\nSigue jugando, no pierde la apuesta.\n");
@@ -154,7 +154,7 @@ float definirGanadoresPerdedores(float puntajes[], float puntajeBanca, int apues
         diferenciaJugador = SIETE_Y_MEDIO - puntajeJugador;
         diferenciaBanca = SIETE_Y_MEDIO - puntajeBanca;
 
-        if(diferenciaBanca<diferenciaJugador){
+        if (diferenciaBanca<diferenciaJugador) {
             printf("\nEl jugador %d pierde su apuesta contra la banca.", jugador+1);
             resultado = puntajeBanca;
         } else if (diferenciaJugador<diferenciaBanca) {

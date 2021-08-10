@@ -29,7 +29,7 @@ void mostrarCarta(int cartas[], int indice) {
     printf("\nSu respuesta: ");
     scanf(" %c", &respuesta);
 
-    if(respuesta == MOSTRAR) {
+    if (respuesta == MOSTRAR) {
         nombrarCarta(cartas, indice);
     } else {
         printf("La carta permanece oculta./n");

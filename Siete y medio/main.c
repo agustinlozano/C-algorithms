@@ -32,7 +32,7 @@ int main(void) {
     printf("\n\nTodo listo para comenzar la partida!");
     separarBloque();
 
-    for(int index = 0; index<=RONDAS_TEST; index++){
+    for (int index = 0; index<=RONDAS_TEST; index++) {
         ronda++;
 
         if (index == RONDAS_TEST) {
