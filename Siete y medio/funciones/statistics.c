@@ -1,12 +1,5 @@
 #include "cartas.h"
 
-int ejecutarEstadisticaFinal(int ganancias[], int mayorApuesta[], int tesoroBanca, const int numeroJugadores) {
-    obtenerMayorGanacia(ganancias, tesoroBanca, numeroJugadores);
-    printf("\nLa mayor apuesta fue de $%d y el jugador fue %d\n", mayorApuesta[POSICION_APUESTA], mayorApuesta[POSICION_JUGADOR]+1);
-
-    return 0;
-}
-
 void obtenerMayorGanacia(int ganancias[], int tesoroBanca, const int numeroJugadores) {
     int gananciaBanca = 0, mayorGanancia = 0, posicionJugador, ganancia;
 
