@@ -9,8 +9,8 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
 
     int tesoroBancaLocal = tesoroBancaPrincipal;
 
-    //ordenar(mazo, LENGTH);
-    //mezclarMazo(mazo);
+    ordenar(mazo, LENGTH);
+    mezclarMazo(mazo);
 
     for(int i = 0; i<numeroJugadores+BANCA; i++){
         if(i == numeroJugadores) {
@@ -64,7 +64,6 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                 if (montoApuesta>mayorApuesta[POSICION_APUESTA]) {
                     mayorApuesta[POSICION_APUESTA] = montoApuesta;
                     mayorApuesta[POSICION_JUGADOR] = j;
-                    printf("\nmayor apuesta: %d\n", mayorApuesta[0]); //QUITAR
                 }
             }
 
@@ -118,7 +117,6 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                         if (montoApuesta>mayorApuesta[POSICION_APUESTA]) {
                             mayorApuesta[POSICION_APUESTA] = montoApuesta;
                             mayorApuesta[POSICION_JUGADOR] = j;
-                            printf("\nmayor apuesta: %d\n", mayorApuesta[0]); //QUITAR
                         }
                     }
                 }
@@ -137,7 +135,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
         }
     }
 
-        // BANCA
+        // TURNO BANCA
     printf("\n\n\tTurno de de la banca.");
     printf("\nEl puntaje correspondiente es: %.1f\n", puntajeBanca);
 
@@ -208,7 +206,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
     }
     separarBloque();
 
-    // Estadistica
+        // Estadistica
     printf("\nLas cartas en juego para esta ronda fueron: \n");
     for(int i = 0; i<indiceMazo; i++){ nombrarCarta(cartasRonda, i); }
 
@@ -268,25 +266,6 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                 separarBloque();
         }
     }
-
-
-    // Estadistica - Opcional
-    // Utilizar varible ronda para mostrar los items adicionales
-    printf("\n");
-    printf("\nEl arreglo de apuestas contiene: \n");
-    imprimirPosicionesArr(apuestas, numeroJugadores);
-    printf("\n");
-    printf("El arreglo de puntajes contiene: \n");
-    imprimirPosicionesArrFloat(puntajes, numeroJugadores+BANCA);
-    printf("\n");
-    printf("El arreglo de premios contiene");
-    imprimirPosicionesArr(premios, numeroJugadores);
-    printf("\n");
-    printf("\nIndice mazo vale: %d", indiceMazo);
-    printf("\n");
-    printf("\nEl arreglo de saldos contiene");
-    imprimirPosicionesArr(saldos, numeroJugadores);
-    printf("\n\nEl tesoro de la banca local es igual a: %d\n", tesoroBancaLocal);
 
     return tesoroBancaLocal;
 }

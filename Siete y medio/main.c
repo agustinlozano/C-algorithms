@@ -1,8 +1,7 @@
 #include "cartas.h"
 
 int main(void) {
-    Baraja mazoPartida = { 10, 21, 32, 16, 2, 35, 7, 17, 27, 22, 3, 32 };
-    //Baraja mazoPartida;
+    Baraja mazoPartida;
     int tesoroBanca = TESORO_INICIAL_BANCA, ronda = 0;
     int saldos[MAXIMOS_JUGADORES_POSIBLES], ganancias[MAXIMOS_JUGADORES_POSIBLES], mayorApuesta[2];
 
