@@ -1,33 +1,33 @@
 #include "cartas.h"
 
-float clasificarNaipe(int cartas[], int indice) {
-    int naipe = cartas[indice];
-    float naipeDecimal = 1/2.0;
+float clasificarNaipe(int cartas[], int jugador) {
+    int naipeSinClsificar = cartas[jugador];
+    float naipeClasificado;
     int divisor = 0;
 
-    if (naipe>=1 && naipe<=7) {
-        return naipe;
+    if (naipeSinClsificar>=1 && naipeSinClsificar<=7) {
+        naipeClasificado = naipeSinClsificar;
     }
-    if (naipe>=11 && naipe<=17) {
+    if (naipeSinClsificar>=11 && naipeSinClsificar<=17) {
         divisor = 10;
-        naipe = naipe % divisor;
-        return naipe;
+        naipeSinClsificar = naipeSinClsificar % divisor;
+        naipeClasificado = naipeSinClsificar;
     }
-    if (naipe>=21 && naipe<=27) {
+    if (naipeSinClsificar>=21 && naipeSinClsificar<=27) {
         divisor = 20;
-        naipe = naipe % divisor;
-        return naipe;
+        naipeSinClsificar = naipeSinClsificar % divisor;
+        naipeClasificado = naipeSinClsificar;
     }
-    if (naipe>=31 && naipe<=37) {
+    if (naipeSinClsificar>=31 && naipeSinClsificar<=37) {
         divisor = 30;
-        naipe = naipe % divisor;
-        return naipe;
+        naipeSinClsificar = naipeSinClsificar % divisor;
+        naipeClasificado = naipeSinClsificar;
     }
-    if(naipe == 8 || naipe == 9 || naipe == 10 || naipe == 18 || naipe == 19 || naipe == 20 || naipe == 28 || naipe == 29 || naipe == 30 || naipe == 38 || naipe == 39  || naipe == 40 ) {
-        return naipeDecimal;
+    if(naipeSinClsificar == 8 || naipeSinClsificar == 9 || naipeSinClsificar == 10 || naipeSinClsificar == 18 || naipeSinClsificar == 19 || naipeSinClsificar == 20 || naipeSinClsificar == 28 || naipeSinClsificar == 29 || naipeSinClsificar == 30 || naipeSinClsificar == 38 || naipeSinClsificar == 39  || naipeSinClsificar == 40 ) {
+        naipeClasificado = VALOR_FIGURA;
     }
 
-    return 0;
+    return naipeClasificado;
 }
 
 void nombrarCarta(int cartas[], int indice) {
