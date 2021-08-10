@@ -1,29 +1,35 @@
 #include "cartas.h"
 
 float clasificarNaipe(int cartas[], int jugador) {
-    int naipeSinClsificar = cartas[jugador];
+    int naipeSinClasificar = cartas[jugador];
     float naipeClasificado;
     int divisor = 0;
 
-    if (naipeSinClsificar>=1 && naipeSinClsificar<=7) {
-        naipeClasificado = naipeSinClsificar;
+    if (naipeSinClasificar>=1 && naipeSinClasificar<=7) {
+        naipeClasificado = naipeSinClasificar;
     }
-    if (naipeSinClsificar>=11 && naipeSinClsificar<=17) {
+    if (naipeSinClasificar>=11 && naipeSinClasificar<=17) {
         divisor = 10;
-        naipeSinClsificar = naipeSinClsificar % divisor;
-        naipeClasificado = naipeSinClsificar;
+        naipeClasificado = naipeSinClasificar % divisor;
     }
-    if (naipeSinClsificar>=21 && naipeSinClsificar<=27) {
+    if (naipeSinClasificar>=21 && naipeSinClasificar<=27) {
         divisor = 20;
-        naipeSinClsificar = naipeSinClsificar % divisor;
-        naipeClasificado = naipeSinClsificar;
+        naipeClasificado = naipeSinClasificar % divisor;
     }
-    if (naipeSinClsificar>=31 && naipeSinClsificar<=37) {
+    if (naipeSinClasificar>=31 && naipeSinClasificar<=37) {
         divisor = 30;
-        naipeSinClsificar = naipeSinClsificar % divisor;
-        naipeClasificado = naipeSinClsificar;
+        naipeClasificado = naipeSinClasificar % divisor;
     }
-    if(naipeSinClsificar == 8 || naipeSinClsificar == 9 || naipeSinClsificar == 10 || naipeSinClsificar == 18 || naipeSinClsificar == 19 || naipeSinClsificar == 20 || naipeSinClsificar == 28 || naipeSinClsificar == 29 || naipeSinClsificar == 30 || naipeSinClsificar == 38 || naipeSinClsificar == 39  || naipeSinClsificar == 40 ) {
+    if(naipeSinClasificar == 8 || naipeSinClasificar == 9 || naipeSinClasificar == 10) {
+        naipeClasificado = VALOR_FIGURA;
+    }
+    if(naipeSinClasificar == 18 || naipeSinClasificar == 19 || naipeSinClasificar == 20) {
+        naipeClasificado = VALOR_FIGURA;
+    }
+    if(naipeSinClasificar == 28 || naipeSinClasificar == 29 || naipeSinClasificar == 30) {
+        naipeClasificado = VALOR_FIGURA;
+    }
+    if(naipeSinClasificar == 38 || naipeSinClasificar == 39  || naipeSinClasificar == 40) {
         naipeClasificado = VALOR_FIGURA;
     }
 
