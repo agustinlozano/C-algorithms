@@ -26,7 +26,7 @@ int main(void) {
     }
 
     for (int i = 0; i<cantidadJugadores; i++) {
-        saldos[i] = SALDO_TEST;                             // CAMBIAR EN LA VERSION FINAL
+        saldos[i] = SALDO_INICIAL_JUGADOR;
         printf("\nSe ha acreditado $5000 en el saldo del jugador %d", i+1);
     }
 
@@ -38,12 +38,12 @@ int main(void) {
     printf("\n\nTodo listo para comenzar la partida!");
     separarBloque();
 
-    for (int index = 0; index<=RONDAS_TEST; index++) {    // CAMBIAR EN LA VERSION FINAL
+    for (int index = 0; index<=MAXIMA_CANTIDAD_RONDAS; index++) {
         ronda++;
 
-        if (index == RONDAS_TEST) {                 // CAMBIAR EN LA VERSION FINAL
+        if (index == MAXIMA_CANTIDAD_RONDAS) {
             printf("\n\n\tFin de la partida!");
-        } else if (index == RONDAS_TEST-1) {    // CAMBIAR EN LA VERSION FINAL
+        } else if (index == MAXIMA_CANTIDAD_RONDAS-1) {
             printf("\n\n\tUltima ronda!");
             tesoroBanca = manejarRonda(
                 mazoPartida, 

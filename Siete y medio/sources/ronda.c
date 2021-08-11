@@ -269,7 +269,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
 
     respuestaEstadistica = VALOR_INICIAL_RESPUESTA;
 
-    if (ronda == RONDAS_TEST) { //CAMBIAR EN LA VERSION FINAL
+    if (ronda == MAXIMA_CANTIDAD_RONDAS) {
         respuestaEstadistica = mostrarMenuEstadisticaPartida();
 
         switch (respuestaEstadistica) {
