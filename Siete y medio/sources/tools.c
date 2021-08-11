@@ -47,7 +47,7 @@ void imprimirEstadisticaInt(int arreglo[], int length) {
             printf("Valor nulo para el jugador %d\n", i+1);
             continue;
         } else {
-            printf("Para el jugador %d es: %d\n", i+1, valor);
+            printf("Para el jugador %d es: $%d\n", i+1, valor);
         }
     }
 }
