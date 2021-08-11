@@ -25,7 +25,7 @@ void obtenerMayorGanacia(int ganancias[], int tesoroBanca, const int numeroJugad
 
 void obtenerMayorApuesta(int mayorApuesta[]) {
     printf("\nLa mayor apuesta fue de $%d, y fue efectuada por el jugador %d\n\n",
-        mayorApuesta[0], mayorApuesta[1]+1);
+        mayorApuesta[APUESTA], mayorApuesta[INDICE_JUGADOR]+1);
 }
 
 void obtenerGananciaTotal(int ganancias[], int tesoroBanca, const int numeroJugadores) {

@@ -181,7 +181,8 @@ int repartirPremio(int saldos[], int premios[], int apuestas[], int ganancias[],
 
     saldos[jugador] = saldojugador + gananciaJugador;
 
-    printf("\nSu ganancia ha sido de $%d y su saldo final aumenta a $%d.\n", gananciaJugador, saldos[jugador]);
+    printf("\nSu ganancia ha sido de $%d y su saldo final aumenta a $%d.\n", 
+        gananciaJugador, saldos[jugador]);
     printf("\nla banca disminuye su tesoro a $%d\n\n", tesoroBanca);
 
     ganancias[jugador] = ganancias[jugador] + gananciaJugador;
@@ -191,7 +192,8 @@ int repartirPremio(int saldos[], int premios[], int apuestas[], int ganancias[],
 
 int aumentarTesoroBanca(int apuestas[], int jugador, int tesoroBanca) {
     tesoroBanca = apuestas[jugador] + tesoroBanca;
-    printf("\nSe le paga a la banca un total de $%d y el tesoro aumenta a $%d\n\n", apuestas[jugador], tesoroBanca);
+    printf("\nSe le paga a la banca un total de $%d y el tesoro aumenta a $%d\n\n", 
+    apuestas[jugador], tesoroBanca);
 
     return tesoroBanca;
 }
