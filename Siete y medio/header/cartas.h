@@ -8,12 +8,12 @@
 #define MAXIMOS_JUGADORES_POSIBLES 5
 #define MINIMOS_JUGADORES_POSIBLES 1
 #define GANANCIA_INICIAL 0
+#define APUESTA 0
+#define INDICE_JUGADOR 1
 #define MAXIMA_CANTIDAD_RONDAS 4
-#define RONDAS_TEST 2
 
 #define TESORO_INICIAL_BANCA 100000
 #define SALDO_INICIAL_JUGADOR 5000
-#define SALDO_TEST 1000
 
 #define BANCA 1
 #define POSIBLES_CARTAS_JUGADOR 8
@@ -46,7 +46,6 @@ typedef int Baraja[LENGTH];
 void ordenar(Baraja mazo, int lengthMazo);
 void mezclarMazo(Baraja mazo);
 
-// Funciones principales
 int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganancias[], int mayorApuesta[], int tesoroBancaPrincipal, int ronda);
 int repartirCarta(Baraja mazo, int indice);
 int validarMonto(int monto);
@@ -90,4 +89,3 @@ void imprimirEstadisticaInt(int arreglo[], int length);
 void imprimirEstadisticaFloat(float arreglo[], int length);
 void separarBloque();
 #endif
-
