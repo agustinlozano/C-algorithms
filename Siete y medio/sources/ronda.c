@@ -97,7 +97,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                         break;
                     default: 
                         printf("\nUps! Parece que ha ingresado un valor incorrecto.\n\n");
-                        break;
+                        respuestaApuesta = PLANTARSE;
                 }
 
                 printf("Y su puntaje es: %.1f\n", puntaje);
@@ -116,7 +116,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                     } else {
                         apuestas[j] = apuestas[j] + montoApuesta;
                         printf("Exito: su desicion para la apuesta fue efectuada.\n");
-                        printf("\nEl saldo del jugador %d ahora es: %d\n", j+1, saldos[j]);
+                        printf("\nEl saldo del jugador %d ahora es: $%d\n", j+1, saldos[j]);
 
                         if (montoApuesta>mayorApuesta[POSICION_APUESTA]) {
                             mayorApuesta[POSICION_APUESTA] = montoApuesta;
@@ -257,8 +257,8 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
             case 1:
                 printf("\nEstadisticas de la partida:\n");
                 obtenerMayorGanacia(gananciasPartida, tesoroBancaLocal, numeroJugadores);
-                printf("La mayor apuesta fue de $%d, y fue efectuada por el jugador %d",
-                        mayorApuesta[0], mayorApuesta[1]+1);
+                obtenerMayorApuesta(mayorApuesta);
+                obtenerGananciaTotal(gananciasPartida, tesoroBancaLocal, numeroJugadores);
                 separarBloque();
                 break;
             case SALIR_MENU_ESTADISTICA:

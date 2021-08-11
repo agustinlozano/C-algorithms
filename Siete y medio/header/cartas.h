@@ -47,7 +47,7 @@ void ordenar(Baraja mazo, int lengthMazo);
 void mezclarMazo(Baraja mazo);
 
 // Funciones principales
-int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganancias[], int mayorApuestas[], int tesoroBancaPrincipal, int ronda);
+int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganancias[], int mayorApuesta[], int tesoroBancaPrincipal, int ronda);
 int repartirCarta(Baraja mazo, int indice);
 int validarMonto(int monto);
 float obtenerPuntaje(int cartas[], int numeroApuestas);
@@ -62,6 +62,8 @@ int aumentarTesoroBanca(int apuestas[], int jugador, int tesoroBanca);
 
 // Estadistica final
 void obtenerMayorGanacia(int ganancias[], int tesoroBanca, const int numeroJugadores);
+void obtenerMayorApuesta(int mayorApuesta[]);
+void obtenerGananciaTotal(int ganancias[], int tesoroBanca, const int numeroJugadores);
 
 // Clasificar naipes
 float clasificarNaipe(int cartas[], int indice);

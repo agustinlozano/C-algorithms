@@ -15,22 +15,39 @@ void obtenerMayorGanacia(int ganancias[], int tesoroBanca, const int numeroJugad
     }
 
     if (ganancia == gananciaBanca && posicionJugador == numeroJugadores) {
-        printf("\nLa mayor ganancia fue $%d, y fue lograda por la banca.\n", mayorGanancia);
+        printf("\nLa mayor ganancia fue $%d, y fue lograda por la banca.\n\n", 
+            mayorGanancia);
     } else {
-        printf("\nLa mayor ganancia fue $%d, y fue lograda por el jugador %d\n", mayorGanancia, posicionJugador+1);
+        printf("\nLa mayor ganancia fue $%d, y fue lograda por el jugador %d\n\n", 
+            mayorGanancia, posicionJugador+1);
     }
 }
 
-void obtenerMayorApuesta(int apuestas[], const int numeroJugadores) {
-    int mayorApuesta = 0, apuesta, posicionJugador;
+void obtenerMayorApuesta(int mayorApuesta[]) {
+    printf("\nLa mayor apuesta fue de $%d, y fue efectuada por el jugador %d\n\n",
+        mayorApuesta[0], mayorApuesta[1]+1);
+}
 
-    for (int i = 0; i<=numeroJugadores; i++) {
-        apuesta = apuestas[i];
-        if (apuesta>=mayorApuesta) {
-            mayorApuesta = apuesta;
-            posicionJugador = i;
-        }
+void obtenerGananciaTotal(int ganancias[], int tesoroBanca, const int numeroJugadores) {
+    int gananciaTotalJugadores = 0, gananciaBanca = 0, diferenciaGanacia;
+
+    gananciaBanca = TESORO_INICIAL_BANCA - tesoroBanca;
+
+    for (int i = 0; i<numeroJugadores; i++) {
+        gananciaTotalJugadores = gananciaTotalJugadores + ganancias[i];
     }
-    printf("\nLa mayor apuesta fue de $%d, y fue realizada por el jugador %d\n", mayorApuesta, posicionJugador+1);
+
+    diferenciaGanacia = gananciaBanca - gananciaTotalJugadores;
+
+    if (diferenciaGanacia == 0) {
+        printf("\nLa banca gano tanto dinero como el conjunto de jugadores,");
+        printf("\ny su ganancia total fue de $%d\n\n", gananciaBanca);
+    } else if (diferenciaGanacia>0) {
+        printf("\nLa banca gano mas dinero que el conjunto de jugadores,");
+        printf("\ny su ganancia total fue de $%d\n\n", gananciaBanca);
+    } else {
+        printf("\nLos jugadores le ganan a la banca!");
+        printf("\nY su ganancia total fue de $%d\n\n", gananciaTotalJugadores);
+    }
 }
 
