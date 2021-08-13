@@ -68,7 +68,7 @@ int mostrarMenuEstadisticaRonda() {
     printf("\n2. Mostrar apuestas");
     printf("\n3. Mostrar puntajes");
     printf("\n4. Mostrar tesoro de la banca");
-    printf("\n0. pasar de las estadisticas");
+    printf("\n0. Pasar de las estadisticas");
     printf("\nSu respuesta: ");
     scanf(" %d", &eleccion);
 
