@@ -69,7 +69,7 @@ int ejecutarMenuDesiciones() {
 
 int mostrarMenuEstadisticaRonda() {
     int eleccion;
-    printf("\n\n\tEstadisticas de la ronda");
+    printf("\n\n\tInformacion de la ronda");
     printf("\nPor favor, elija una de las siguientes opciones:");
     printf("\n1. Mostrar saldos");
     printf("\n2. Mostrar apuestas");

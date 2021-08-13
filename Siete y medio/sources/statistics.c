@@ -15,17 +15,17 @@ void obtenerMayorGanacia(int ganancias[], int tesoroBanca, const int numeroJugad
     }
 
     if (ganancia == gananciaBanca && posicionJugador == numeroJugadores) {
-        printf("\nLa mayor ganancia fue $%d, y fue lograda por la banca.\n\n", 
+        printf("\nLa mayor ganancia fue $%d, y fue lograda por la banca.\n",
             mayorGanancia);
     } else {
-        printf("\nLa mayor ganancia fue $%d, y fue lograda por el jugador %d\n\n", 
+        printf("\nLa mayor ganancia fue $%d, y fue lograda por el jugador %d\n",
             mayorGanancia, posicionJugador+1);
     }
 }
 
 void obtenerMayorApuesta(int mayorApuesta[]) {
-    printf("\nLa mayor apuesta fue de $%d, y fue efectuada por el jugador %d\n\n",
-        mayorApuesta[APUESTA], mayorApuesta[INDICE_JUGADOR]+1);
+    printf("\nLa mayor apuesta fue de $%d, y fue efectuada por el jugador %d\n",
+        mayorApuesta[POSICION_APUESTA], mayorApuesta[POSICION_JUGADOR]+1);
 }
 
 void obtenerGananciaTotal(int ganancias[], int tesoroBanca, const int numeroJugadores) {

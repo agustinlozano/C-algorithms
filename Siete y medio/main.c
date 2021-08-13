@@ -2,11 +2,11 @@
 
 int main(void) {
     Baraja mazoPartida;
-    
+
     int tesoroBanca = TESORO_INICIAL_BANCA, ronda = 0;
-    
-    int saldos[MAXIMOS_JUGADORES_POSIBLES], 
-        ganancias[MAXIMOS_JUGADORES_POSIBLES], 
+
+    int saldos[MAXIMOS_JUGADORES_POSIBLES],
+        ganancias[MAXIMOS_JUGADORES_POSIBLES],
         mayorApuesta[1];
 
     ejecutarMenuPresentacion();
@@ -17,7 +17,7 @@ int main(void) {
         printf("El numero de jugadores se ingreso correctamente.\n");
     } else {
         char respuesta;
-        printf("ERROR: Usted ha ingresado un valor incorrecto.\n");
+        printf("\nERROR: Usted ha ingresado un valor incorrecto.\n");
         printf("Desea volver al menu principal? [y/n]\n");
         scanf(" %c", &respuesta);
         if (respuesta == SI) {
@@ -32,8 +32,8 @@ int main(void) {
 
     rellenarArreglo(ganancias, MAXIMOS_JUGADORES_POSIBLES, GANANCIA_INICIAL);
 
-    mayorApuesta[APUESTA] = 0;
-    mayorApuesta[INDICE_JUGADOR] = 0;
+    mayorApuesta[POSICION_APUESTA] = 0;
+    mayorApuesta[POSICION_JUGADOR] = 0;
 
     printf("\n\nTodo listo para comenzar la partida!");
     separarBloque();
@@ -46,23 +46,23 @@ int main(void) {
         } else if (index == MAXIMA_CANTIDAD_RONDAS-1) {
             printf("\n\n\tUltima ronda!");
             tesoroBanca = manejarRonda(
-                mazoPartida, 
-                cantidadJugadores, 
-                saldos, 
-                ganancias, 
-                mayorApuesta, 
-                tesoroBanca, 
+                mazoPartida,
+                cantidadJugadores,
+                saldos,
+                ganancias,
+                mayorApuesta,
+                tesoroBanca,
                 ronda
             );
         } else {
             printf("\n\n\tRonda numero %d\n", ronda);
             tesoroBanca = manejarRonda(
-                mazoPartida, 
-                cantidadJugadores, 
-                saldos, 
-                ganancias, 
-                mayorApuesta, 
-                tesoroBanca, 
+                mazoPartida,
+                cantidadJugadores,
+                saldos,
+                ganancias,
+                mayorApuesta,
+                tesoroBanca,
                 ronda
             );
 

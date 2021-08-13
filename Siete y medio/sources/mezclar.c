@@ -10,7 +10,7 @@ void mezclarMazo(Baraja mazo) {
 
     srand((unsigned) time(&tiempo));
 
-    while (tiempo) {
+    while (indice<LENGTH) {
         // Genero un naipe entre 1 y 40, luego lo almaceno en una varible.
         int numero = rand();
         naipeAleatorio = (numero % 40) + 1;
@@ -21,18 +21,16 @@ void mezclarMazo(Baraja mazo) {
             // Si existe no lo agrego
             if (naipeAleatorio == mazo[i]) {
                 break;
+            } else {
+                count++;
             }
-            count++;
+
             // Si no existia lo agrego
             if (count == LENGTH-1) {
                 mazo[indice] = naipeAleatorio;
                 indice++;
                 break;
             }
-        }
-
-        if (indice == LENGTH) {
-            break;
         }
     }
 }
