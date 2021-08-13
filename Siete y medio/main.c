@@ -3,17 +3,24 @@
 int main(void) {
     Baraja mazoPartida;
 
-    int tesoroBanca = TESORO_INICIAL_BANCA, ronda = 0;
+    int tesoroBanca = TESORO_INICIAL, ronda = 0;
 
-    int saldos[MAXIMOS_JUGADORES_POSIBLES],
-        ganancias[MAXIMOS_JUGADORES_POSIBLES],
-        mayorApuesta[2];
+    int saldos[MAXIMOS_JUGADORES],
+        ganancias[MAXIMOS_JUGADORES],
+        mayorApuesta[POSICIONES_MAYOR_APUESTA];
 
-    ejecutarMenuPresentacion();
+    char respuesta;
+    printf("\nDesea ver el menu de presentacion? [y/n]");
+    printf("\nSu respuesta: ");
+    scanf(" %c", &respuesta);
+
+    if (respuesta == SI) {
+        ejecutarMenuPresentacion();
+    }
 
     const int cantidadJugadores = determinarJugadores();
 
-    if (cantidadJugadores>=MINIMOS_JUGADORES_POSIBLES && cantidadJugadores<=MAXIMOS_JUGADORES_POSIBLES) {
+    if (cantidadJugadores>=MINIMOS_JUGADORES && cantidadJugadores<=MAXIMOS_JUGADORES) {
         printf("El numero de jugadores se ingreso correctamente.\n");
     } else {
         char respuesta;
@@ -26,11 +33,11 @@ int main(void) {
     }
 
     for (int i = 0; i<cantidadJugadores; i++) {
-        saldos[i] = SALDO_INICIAL_JUGADOR;
+        saldos[i] = SALDO_INICIAL;
         printf("\nSe ha acreditado $5000 en el saldo del jugador %d", i+1);
     }
 
-    rellenarArreglo(ganancias, MAXIMOS_JUGADORES_POSIBLES, GANANCIA_INICIAL);
+    rellenarArreglo(ganancias, MAXIMOS_JUGADORES, GANANCIA_INICIAL);
 
     mayorApuesta[POSICION_APUESTA] = 0;
     mayorApuesta[POSICION_JUGADOR] = 0;
@@ -38,12 +45,12 @@ int main(void) {
     printf("\n\nTodo listo para comenzar la partida!");
     separarBloque();
 
-    for (int index = 0; index<=MAXIMA_CANTIDAD_RONDAS; index++) {
+    for (int index = 0; index<=MAXIMAS_RONDAS; index++) {
         ronda++;
 
-        if (index == MAXIMA_CANTIDAD_RONDAS) {
+        if (index == MAXIMAS_RONDAS) {
             printf("\n\n\tFin de la partida!");
-        } else if (index == MAXIMA_CANTIDAD_RONDAS-1) {
+        } else if (index == MAXIMAS_RONDAS-1) {
             printf("\n\n\tUltima ronda!");
             tesoroBanca = manejarRonda(
                 mazoPartida,

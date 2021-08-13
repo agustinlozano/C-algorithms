@@ -1,16 +1,9 @@
 #include "cartas.h"
 
 void ejecutarMenuPresentacion() {
-    char respuesta;
-    printf("\nDesea ver el menu de presentacion? [y/n]");
-    printf("\nSu respuesta: ");
-    scanf(" %c", &respuesta);
-
-    if (respuesta == SI) {
-        printf("\n\tSiete y medio");
-        printf("\nEl juego consiste en un numero minimo de dos rondas y maximo cuatro,");
-        printf("\ncada jugador debe disponer de $5000 para poder ingresar a una partida.\n");
-    }
+    printf("\n\tSiete y medio");
+    printf("\nEl juego consiste en un numero minimo de dos rondas y maximo cuatro,");
+    printf("\ncada jugador debe disponer de $5000 para poder ingresar a una partida.\n");
 }
 
 int determinarJugadores() {

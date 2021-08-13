@@ -1,6 +1,10 @@
 #include "cartas.h"
 
-int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int gananciasPartida[], int mayorApuesta[], int tesoroBancaPrincipal, int ronda) {
+int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[],
+                  int gananciasPartida[], int mayorApuesta[],
+                  int tesoroBancaPrincipal, int ronda)
+    {
+
     const int cartasPosibles = POSIBLES_CARTAS_JUGADOR*numeroJugadores;
     int cartasRonda[cartasPosibles],
         apuestas[numeroJugadores],
@@ -11,6 +15,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
 
     int tesoroBancaLocal = tesoroBancaPrincipal;
 
+        //Comienzo
     ordenar(mazo, LENGTH);
     mezclarMazo(mazo);
 
@@ -26,7 +31,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
         indiceMazo++;
     }
 
-        //COMIENZO SEGUNDO FOR - Turnos
+        //Turnos
     printf("\n");
     for (int j = 0; j<numeroJugadores; j++) {
         if (saldos[j]<MINIMA_APUESTA) {
@@ -70,17 +75,17 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                 }
             }
 
-            int respuestaApuesta = 0;
-            float puntaje = 0;
-
             separarBloque();
 
+            //Decidir
+            int respuesta = 0;
+            float puntaje = 0;
             printf("\n\tEs momento para tomar una decision!");
-            while (respuestaApuesta != PLANTARSE) {
+            while (respuesta != PLANTARSE) {
 
-                respuestaApuesta = ejecutarMenuDesiciones();
+                respuesta = ejecutarMenuDesiciones();
 
-                switch (respuestaApuesta) {
+                switch (respuesta) {
                     case PEDIR_CARTA:
                         cartasDelJugador[indiceJugador] = repartirCarta(mazo, indiceMazo);
                         cartasRonda[indiceMazo] = cartasDelJugador[indiceJugador];
@@ -100,13 +105,13 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                         break;
                     default:
                         printf("\nUps! Parece que ha ingresado un valor incorrecto.\n\n");
-                        respuestaApuesta = PLANTARSE;
+                        respuesta = PLANTARSE;
                 }
 
                 printf("Y su puntaje es: %.1f\n", puntaje);
                 puntaje = evaluarPuntaje(puntaje);
 
-                if (puntaje == NULO || respuestaApuesta == PLANTARSE) {
+                if (puntaje == NULO || respuesta == PLANTARSE) {
                     break;
                 } else {
                     printf("\n\tDesea seguir apostando?");
@@ -129,7 +134,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                 }
             }
 
-            respuestaApuesta = 0;
+            //Finalizar turno
             puntajes[j] = puntaje;
             premios[j] = clasificarPremio(cartasDelJugador, indiceJugador, puntaje);
 
@@ -229,7 +234,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
     }
     separarBloque();
 
-        //Estadistica
+        //Estadistica e informacion
     printf("\nLas cartas en juego para esta ronda fueron: \n");
     for (int i = 0; i<indiceMazo; i++) { nombrarCarta(cartasRonda, i); }
 
@@ -269,7 +274,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
 
     respuestaEstadistica = VALOR_INICIAL_RESPUESTA;
 
-    if (ronda == MAXIMA_CANTIDAD_RONDAS) {
+    if (ronda == MAXIMAS_RONDAS) {
         respuestaEstadistica = mostrarMenuEstadisticaPartida();
 
         switch (respuestaEstadistica) {

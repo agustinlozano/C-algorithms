@@ -3,7 +3,7 @@
 void obtenerMayorGanacia(int ganancias[], int tesoroBanca, const int numeroJugadores) {
     int gananciaBanca = 0, mayorGanancia = 0, posicionJugador, ganancia;
 
-    gananciaBanca = tesoroBanca - TESORO_INICIAL_BANCA;
+    gananciaBanca = tesoroBanca - TESORO_INICIAL;
     ganancias[numeroJugadores] = gananciaBanca;
 
     for (int i = 0; i<=numeroJugadores; i++) {
@@ -31,7 +31,7 @@ void obtenerMayorApuesta(int mayorApuesta[]) {
 void obtenerGananciaTotal(int ganancias[], int tesoroBanca, const int numeroJugadores) {
     int gananciaTotalJugadores = 0, gananciaBanca = 0, diferenciaGanacia;
 
-    gananciaBanca = TESORO_INICIAL_BANCA - tesoroBanca;
+    gananciaBanca = TESORO_INICIAL - tesoroBanca;
 
     for (int i = 0; i<numeroJugadores; i++) {
         gananciaTotalJugadores = gananciaTotalJugadores + ganancias[i];
