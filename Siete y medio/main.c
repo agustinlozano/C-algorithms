@@ -7,7 +7,7 @@ int main(void) {
 
     int saldos[MAXIMOS_JUGADORES_POSIBLES],
         ganancias[MAXIMOS_JUGADORES_POSIBLES],
-        mayorApuesta[1];
+        mayorApuesta[2];
 
     ejecutarMenuPresentacion();
 

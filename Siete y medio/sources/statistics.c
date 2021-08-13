@@ -46,7 +46,7 @@ void obtenerGananciaTotal(int ganancias[], int tesoroBanca, const int numeroJuga
         printf("\nLa banca gano mas dinero que el conjunto de jugadores,");
         printf("\ny su ganancia total fue de $%d\n\n", gananciaBanca);
     } else {
-        printf("\nLos jugadores le ganan a la banca!");
+        printf("\nEl conjunto de jugadores logro mas ganancias que la banca.");
         printf("\nY su ganancia total fue de $%d\n\n", gananciaTotalJugadores);
     }
 }

@@ -2,8 +2,8 @@
 
 int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int gananciasPartida[], int mayorApuesta[], int tesoroBancaPrincipal, int ronda) {
     const int cartasPosibles = POSIBLES_CARTAS_JUGADOR*numeroJugadores;
-    int cartasRonda[cartasPosibles], 
-        apuestas[numeroJugadores], 
+    int cartasRonda[cartasPosibles],
+        apuestas[numeroJugadores],
         premios[numeroJugadores];
 
     float puntajes[numeroJugadores], puntajeBanca = 0;
@@ -98,7 +98,7 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
                         printf("\nVeamos sus cartas y luego calculemos el puntaje.\n");
                         puntaje = obtenerPuntaje(cartasDelJugador, indiceJugador);
                         break;
-                    default: 
+                    default:
                         printf("\nUps! Parece que ha ingresado un valor incorrecto.\n\n");
                         respuestaApuesta = PLANTARSE;
                 }
@@ -195,11 +195,11 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
             } else {
                 printf("\nJugador %d recibe su pago.", i+1);
                 tesoroBancaLocal = repartirPremio(
-                    saldos, 
-                    premios, 
-                    apuestas, 
-                    gananciasPartida, 
-                    i, 
+                    saldos,
+                    premios,
+                    apuestas,
+                    gananciasPartida,
+                    i,
                     tesoroBancaLocal
                 );
             }
@@ -217,11 +217,11 @@ int manejarRonda(Baraja mazo, const int numeroJugadores, int saldos[], int ganan
             } else {
                 printf("\ny la bonificacion correspondiente para el es: %d\n", premios[i]);
                 tesoroBancaLocal = repartirPremio(
-                    saldos, 
-                    premios, 
-                    apuestas, 
-                    gananciasPartida, 
-                    i, 
+                    saldos,
+                    premios,
+                    apuestas,
+                    gananciasPartida,
+                    i,
                     tesoroBancaLocal
                 );
             }
